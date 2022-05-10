@@ -1,0 +1,17 @@
+.header {
+  margin: auto;
+  max-width: 880px;
+  padding: 45px 200px 0px;
+}
+
+.header_title {
+  max-width: 173px;
+  /* height: 33px; */
+}
+
+.header__separator {
+  display: flex;
+  margin: auto;
+  max-width: 100%;
+  padding-top: 41px;
+}
