@@ -1,12 +1,11 @@
 .header {
-  margin: auto;
+  margin: 0 auto;
   max-width: 880px;
-  padding: 45px 200px 0px;
+  padding: 45px 0 0 0;
 }
 
 .header_title {
   max-width: 173px;
-  /* height: 33px; */
 }
 
 .header__separator {
