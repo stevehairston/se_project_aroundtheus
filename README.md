@@ -1,21 +1,23 @@
 # Project 3: Around The U.S.
 
-### Overview
+## Project features
+This is the third project of the Software Engineer Program at Practicum. It was created using HTML and CSS.
+This project demonstrates what can be achieved by designing responsive websites to adjust to changes in the
+browser window and different dispaly sizes to improvide the user experience.
 
-- Intro
-- Figma
-- Images
+- Semantic HTML5
+- CSS3
+- Flexbox
+- Positioning
+- Flat BEM
+- Media Queries
+- CSS animation and transform
 
-**Intro**
+  https://github.com/stevehairston/se_project_aroundtheus.git
 
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
+### Plans to improve the project
+Future improvments for the project would be to add:
 
-**Figma**
-
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
-
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
-
-Good luck and have fun!
+1. Add user contact content
+2. Introduce social media links
+3. Provide an upload function for videos.

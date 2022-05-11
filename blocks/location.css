@@ -48,7 +48,7 @@
   .location__cards {
    display: grid;
    justify-content: center;
-   grid-template-columns: 1fr 1fr ;
+   grid-template-columns: 1fr 1fr;
    grid-template-rows: 1fr 1fr;
    gap: 17px 17px;
    max-width: 50%;
