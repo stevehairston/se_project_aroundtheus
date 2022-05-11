@@ -1,5 +1,5 @@
 
-.location__cards {
+.location-cards {
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -45,7 +45,7 @@
 }
 
 @media(min-width: 596px) and (max-width: 1024px) {
-  .location__cards {
+  .location-cards {
    display: grid;
    justify-content: center;
    grid-template-columns: 1fr 1fr;
@@ -56,7 +56,7 @@
  }
 
 @media(min-width: 320px) and (max-width: 595px) {
-  .location__cards {
+  .location-cards {
    display: grid;
    justify-content: center;
    grid-template-columns: 1fr;
