@@ -59,8 +59,8 @@
   align-self: center;
   padding: 0;
   background-color:black;
-  max-height: 24px;
-  max-width: 24px;
+  height: 24px;
+  width: 24px;
   /* margin-left: 15.25px; */
   margin-left: 18px;
   box-sizing: border-box;
@@ -81,7 +81,6 @@
   background-color: black;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
   padding: 0;
   border: 2px #ffffff;
   border-style: solid;
