@@ -2,10 +2,12 @@
 .location-cards {
   margin: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, 282px);
   grid-template-rows: 1fr 1fr;
   gap: 17px 17px;
   max-width: 880px;
+  justify-content: center;
+  padding: 0 24px;
 }
 
 .card {
@@ -43,25 +45,3 @@
 .card__footer-icon {
   padding: 0 22.24px 0 0;
 }
-
-@media(min-width: 596px) and (max-width: 1024px) {
-  .location-cards {
-   display: grid;
-   justify-content: center;
-   grid-template-columns: 1fr 1fr;
-   grid-template-rows: 1fr 1fr;
-   gap: 17px 17px;
-   max-width: 50%;
- }
- }
-
-@media(min-width: 320px) and (max-width: 595px) {
-  .location-cards {
-   display: grid;
-   justify-content: center;
-   grid-template-columns: 1fr;
-   grid-template-rows: 1fr;
-   gap: 17px 17px;
-   max-width: 50%;
- }
- }

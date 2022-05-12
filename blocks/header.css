@@ -13,4 +13,11 @@
   margin: auto;
   max-width: 100%;
   padding-top: 41px;
+  border-bottom: 1px rgba(84,84,84, .7) solid;
+}
+
+@media(max-width: 920px) {
+  .header__title-container {
+   margin-left: 27px;
+  }
 }

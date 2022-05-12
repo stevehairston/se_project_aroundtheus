@@ -14,16 +14,14 @@
 <body>
   <div class="page">
     <header class="header">
+      <div class="header__title-container">
       <img
         src="./images/around_the_us.svg"
         alt="Around The U.S. title"
         class="header__title"
       />
-      <img
-        src="./images/header_separator.svg"
-        alt="Header Separator line"
-        class="header__separator"
-      />
+      </div>
+      <div class="header__separator"></div>
     </header>
 
     <main>
@@ -37,23 +35,23 @@
               class="avatar">
             </div>
               <div class="profile__title-description">
-                <div class="profile__title-button_container">
+                <div class="profile__title-container">
                   <h1 class="profile__title">Jacques Cousteau</h1>
-                  <button class="profile__edit-button">
+                  <button class="profile__edit-button" type="button">
                     <img
                       src="./images/edit_button_icon.svg"
                       alt="Edit button"
-                      class="profile__edit-button_icon"
+                      class="profile__edit-icon"
                       />
                   </button>
                 </div>
                 <p class="profile__description">Explorer</p>
               </div>
           </div>
-            <button class="profile__add-button">
+            <button class="profile__add-button" type="button">
               <img src="./images/add_button_icon.svg"
               alt="Add button"
-              class="profile__add-button_icon">
+              class="profile__add-icon">
             </button>
         </div>
         <div class="location-cards">
@@ -115,8 +113,8 @@
       </section>
     </main>
 
-    <footer>
-      <div class="footer__copyright">&#169; 2022 Around The U.S.</div>
+    <footer class="">
+      <p class="footer__copyright">&#169; 2022 Around The U.S.</p>
     </footer>
   </div>
 </body>
