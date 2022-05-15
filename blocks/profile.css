@@ -79,8 +79,6 @@
   border: 2px #ffffff solid;
   border-radius: 2px;
   cursor: pointer;
-  /* position: relative;
-  right: -165px; */
 }
 
 .profile__add-button:hover {
