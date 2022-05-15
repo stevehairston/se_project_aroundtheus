@@ -23,3 +23,5 @@ Future improvments for the project would be to add:
 3. Provide an upload function for videos.
 
 https://github.com/stevehairston/se_project_aroundtheus.git
+
+https://stevehairston.github.io/se_project_aroundtheus/

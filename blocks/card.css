@@ -33,7 +33,7 @@
 
 .card__favorite {
   margin: 0;
-  background-color: #ffffff;
+  background-color: transparent;
   border: none;
   padding: 0;
   cursor: pointer;
@@ -48,10 +48,9 @@
   max-width: 20.76px;
   max-height: 18.13px;
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .card__favorite:hover::before {
-  color: #000000;
   opacity: 0.5;
 }

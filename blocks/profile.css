@@ -1,7 +1,11 @@
 .profile {
   display: flex;
-  margin: 0;
   max-width: 880px;
+  display: flex;
+  margin: auto;
+  padding: 40px 19px 51px 19px;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .profile__avatar {
@@ -12,7 +16,7 @@
 }
 
 .profile__title-description {
-  margin: 22px 165px 0 0;
+  margin: 22px 0 0 0;
 }
 
 .profile__title-container {
@@ -79,27 +83,17 @@
   border: 2px #ffffff solid;
   border-radius: 2px;
   cursor: pointer;
+  margin-left: auto;
 }
 
 .profile__add-button:hover {
-  border: 2px solid #ffffff;
   opacity: 0.6;
-  border-radius: 2px;
 }
 
 @media (max-width: 775px) {
   .profile__title-description {
     margin-right: 0;
   }
-}
-
-@media (min-width: 776px) and (max-width: 909px) {
-  .profile__title-description {
-    margin-right: 82px;
-  }
-}
-
-@media (max-width: 775px) {
   .profile {
     flex-direction: column;
     justify-content: center;
@@ -114,6 +108,7 @@
   }
   .profile__add-button {
     margin-top: 36px;
+    margin-left: 0;
   }
 }
 
