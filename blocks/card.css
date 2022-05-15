@@ -1,22 +1,8 @@
-
-.location-cards {
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 282px);
-  grid-template-rows: 1fr 1fr;
-  gap: 17px 17px;
-  max-width: 880px;
-  justify-content: center;
-  padding: 0 24px;
-}
-
 .card {
   display: flex;
   flex-direction: column;
   margin: 0;
   max-width: 282px;
-  left: 200px;
-  top: 330px;
 }
 
 .card__image {
@@ -29,11 +15,14 @@
   justify-content: space-between;
   background-color: #ffffff;
   border-radius: 0 0 10px 10px;
+  padding-right: 22.24px;
+}
+
+.card__footer:hover {
 }
 
 .card__text {
   margin: 0;
-  font-family: 'Inter';
   font-size: 24px;
   font-weight: 900;
   padding: 25px 0 31px 21px;
@@ -42,6 +31,27 @@
   overflow: hidden;
 }
 
-.card__footer-icon {
-  padding: 0 22.24px 0 0;
+.card__favorite {
+  margin: 0;
+  background-color: #ffffff;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.card__favorite::before {
+  content: url(../images/heart_favorite_icon.svg);
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-self: center;
+  max-width: 20.76px;
+  max-height: 18.13px;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.card__favorite:hover::before {
+  color: #000000;
+  opacity: 0.5;
 }

@@ -1,23 +1,12 @@
 .header {
   margin: 0 auto;
   max-width: 880px;
-  padding: 45px 0 0 0;
+  padding: 45px 0 41px 0;
+  border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
 }
 
-.header_title {
-  max-width: 173px;
-}
-
-.header__separator {
-  display: flex;
-  margin: auto;
-  max-width: 100%;
-  padding-top: 41px;
-  border-bottom: 1px rgba(84,84,84, .7) solid;
-}
-
-@media(max-width: 920px) {
-  .header__title-container {
-   margin-left: 27px;
+@media (max-width: 920px) {
+  .header {
+    padding-bottom: 32px;
   }
 }
