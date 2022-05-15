@@ -118,6 +118,7 @@
 @media (max-width: 452px) {
   .profile__title {
     font-size: 22px;
+    line-height: 27px;
     margin-bottom: 0;
   }
   .profile__add-button {
@@ -128,10 +129,6 @@
   .profile__edit-button {
     max-height: 18px;
     max-width: 18px;
-  }
-  .profile__title {
-    font-size: 22px;
-    line-height: 27px;
   }
   .profile__description {
     font-size: 14px;
