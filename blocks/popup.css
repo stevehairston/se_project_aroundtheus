@@ -1,0 +1,123 @@
+.popup {
+  display: none;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  margin: 0;
+  background-color: rgba(0,0,0,.5);
+}
+
+.popup_content {
+  width: 430px;
+  background-color: #ffffff;
+  /* box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15); */
+  border-radius: 10px;
+  height: 330px;
+  width: 430px;
+  left: 425px;
+  top: 195px;
+  position: fixed;
+  margin: 0 auto;
+  z-index: auto;
+}
+
+.popup__is-opened {
+  display: flex;
+}
+
+.popup__close {
+  position: fixed;
+  /* height: 48.28px;
+  width: 48.28px; */
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  left: 66.15%;
+  right: 30.73%;
+  top: 146.72px;
+  /* top: 146.72px;
+  right: 376.72px; */
+  background: #000000;
+  /* transform: rotate(-45deg); */
+  background-image: url(../images/close_icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-color: transparent; */
+  border: none;
+}
+
+.popup__close:hover {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.popup__title {
+  /* position: absolute; */
+  width: 330px;
+  height: 23px;
+  left: 461px;
+  top: 229px;
+  padding: 0px 64px 0px 0px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: black;
+  margin: 34px 0 54px 36px;
+}
+
+.popup__input {
+  /* position: absolute; */
+  width: 350px;
+  height: 14px;
+  left: 461px;
+  border-bottom: 1px solid #000000;
+  /* opacity: 0.2; */
+  line-height: 17px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.popup__input_type_title {
+  width: 358px;
+  height: 14px;
+  /* height: 27.26px; */
+  left: 461px;
+  top: 306px;
+  padding: 0 0 13.26px 0;
+  border: none;
+  border-bottom: 1px solid #000000;
+  /* opacity: 0.2; */
+  margin: 0 36px 29.74px;
+  /* box-sizing: border-box; */
+  outline: none;
+}
+
+.popup__input_type_description {
+  width: 358px;
+  height: 14px;
+  /* height: 27.26px; */
+  left: 461px;
+  top: 306px;
+  padding: 0 0 13.26px 0;
+  border: none;
+  border-bottom: 1px solid #000000;
+  /* opacity: 0.2; */
+  margin: 0 36px 48px 36px;
+  outline: none;
+}
+
+.popup__button-save {
+  width: 358px;
+  height: 50.15px;
+  left: 461px;
+  top: 438.34px;
+  background-color: black;
+  border: none;
+  border-radius: 2px;
+  padding: 0 36px 0;
+  color: #ffffff;
+  margin: 0 36px 0;
+}

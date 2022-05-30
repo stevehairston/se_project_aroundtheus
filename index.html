@@ -26,30 +26,30 @@
 
       <main>
         <section class="profile">
-            <img
-              src="./images/jacques_cousteau_avatar.jpg"
-              alt="Jacques Cousteau avatar"
-              class="profile__avatar"
-            />
-            <div class="profile__title-description">
-              <div class="profile__title-container">
-                <h1 class="profile__title">Jacques Cousteau</h1>
-                <button
-                  aria-label="edit button"
-                  class="profile__edit-button"
-                  type="button"
-                ></button>
-              </div>
-              <h2 class="profile__description">Explorer</h2>
+          <img
+            src="./images/jacques_cousteau_avatar.jpg"
+            alt="Jacques Cousteau avatar"
+            class="profile__avatar"
+          />
+          <div class="profile__title-description">
+            <div class="profile__title-container">
+              <h1 class="profile__title">Jacques Cousteau</h1>
+              <button
+                aria-label="edit button"
+                class="profile__edit-button"
+                type="button"
+              ></button>
             </div>
-            <button
-              aria-label="add button"
-              class="profile__add-button"
-              type="button"
-            ></button>
+            <h2 class="profile__description">Explorer</h2>
+          </div>
+          <button
+            aria-label="add button"
+            class="profile__add-button"
+            type="button"
+          ></button>
         </section>
         <section class="cards">
-          <div class="card">
+          <!-- <div class="card">
             <img
               src="./images/yosemite-valley.jpg"
               alt="Yosemite Valley picture"
@@ -138,13 +138,58 @@
                 type="button"
               ></button>
             </div>
-          </div>
+          </div> -->
+          <template id="card-tmpl">
+            <div class="card">
+              <img
+                src="./images/lago-di-braies.jpg"
+                alt=""
+                class="card__image"
+              />
+              <div class="card__footer">
+                <h2 class="card__text"></h2>
+                <button
+                  aria-label="favorite button"
+                  class="card__favorite"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+          </template>
         </section>
       </main>
 
       <footer class="footer">
         <p class="footer__copyright">&#169; 2022 Around The U.S.</p>
       </footer>
+      <div class="popup">
+        <div class="popup_content">
+          <button class="popup__button popup__close" type="button"></button>
+          <h3 class="popup__title">Edit profile</h3>
+          <form class="popup__form" id="edit-profile-form">
+            <input
+              type="text"
+              class="popup__input popup__input_type_title"
+              name="title"
+              placeholder="Name"
+            />
+            <input
+              class="popup__input popup__input_type_description"
+              name="description"
+              placeholder="Description"
+              type="text"
+            />
+            <button
+              class="button popup__button popup__button-save"
+              type="submit"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
+
+    <script defer src="/scripts/index.js"></script>
   </body>
 </html>
