@@ -3,11 +3,14 @@
   flex-direction: column;
   margin: 0;
   max-width: 282px;
+  max-height: 361px;
 }
 
 .card__image {
   border-radius: 10px 10px 0px 0px;
   background-color: #000000;
+  flex-grow: 1;
+  max-height: 282px;
 }
 
 .card__footer {

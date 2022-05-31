@@ -5,12 +5,18 @@ const profileEditForm = document.querySelector("#edit-profile-form");
 const profileTitleEl = document.querySelector(".profile__title");
 const profileDescriptionEl = document.querySelector(".profile__description");
 
+const cardsListEl = document.querySelector(".cards");
+
 const profileTitleInput = profileEditForm.querySelector(
   ".popup__input_type_title"
 );
 const profileDescriptionInput = document.querySelector(
   ".popup__input_type_description"
 );
+
+// Card Template
+let cardTemplate =
+  document.querySelector("#card-tmpl").content.firstElementChild;
 
 function closePopup() {
   profileEditPopup.classList.remove("popup__is-opened");
@@ -41,47 +47,48 @@ profileEditForm.addEventListener("submit", (event) => {
   closePopup();
 });
 
-let locationCard1 = {
-  name: "Yosemite Valley",
-  link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-};
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
+  },
 
-let locationCard2 = {
-  name: "Lake Louise",
-  link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-};
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
+  },
 
-let locationCard3 = {
-  name: "Bald Mountains",
-  link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-};
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
+  },
 
-let locationCard4 = {
-  name: "Latemar",
-  link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-};
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
+  },
 
-let locationCard5 = {
-  name: "Vanoise National Park",
-  link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-};
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
+  },
 
-let locationCard6 = {
-  name: "Lago di Braies",
-  link: "https://code.s3.yandex.net/web-code/lago.jpg ",
-};
-
-let initialCards = [
-  "locationCard1",
-  "locationCard2",
-  "locationCard3",
-  "locationCard4",
-  "locationCard5",
-  "locationCard6",
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg ",
+  },
 ];
 
 function getCardElement(data) {
-  let cardElement = userTemplate.querySelector("#card-tmpl").cloneNode(true);
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImage = cardElement.querySelector(".card__image");
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
+  cardElement.querySelector(".card__text").textContent = data.name;
+  return cardElement;
 }
 
-for (let i = 0; i < initialCards.length; i++) {}
+initialCards.forEach((cardData) => {
+  const hydratedCardEl = getCardElement(cardData);
+  cardsListEl.append(hydratedCardEl);
+});
