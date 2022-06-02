@@ -43,7 +43,6 @@ function handleProfileSubmit(event) {
   closePopup();
 }
 
-profileEditButton.addEventListener("click", openPopup);
 profileEditButton.addEventListener("click", handleOpenEditPopup);
 
 profileEditCloseButton.addEventListener("click", closePopup);
