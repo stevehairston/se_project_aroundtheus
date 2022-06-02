@@ -3,38 +3,42 @@
   flex-direction: column;
   margin: 0;
   max-width: 282px;
-  max-height: 361px;
 }
 
 .card__image {
   border-radius: 10px 10px 0px 0px;
-  background-color: #000000;
-  flex-grow: 1;
-  max-height: 282px;
+  height: 282px;
+  object-fit: cover;
 }
 
 .card__footer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
   border-radius: 0 0 10px 10px;
-  padding-right: 22.24px;
-}
-
-.card__footer:hover {
+  padding: 25px 18px 25px 21px;
 }
 
 .card__text {
   margin: 0;
   font-size: 24px;
   font-weight: 900;
-  padding: 25px 0 31px 21px;
+  line-height: 29px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  flex-shrink: 2;
 }
 
 .card__favorite {
+  background-image: url(../images/heart_favorite_icon.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-shrink: 1;
+  width: 21px;
+  height: 18px;
   margin: 0;
   background-color: transparent;
   border: none;
@@ -42,18 +46,6 @@
   cursor: pointer;
 }
 
-.card__favorite::before {
-  content: url(../images/heart_favorite_icon.svg);
-  display: flex;
-  margin: 0;
-  padding: 0;
-  align-self: center;
-  max-width: 20.76px;
-  max-height: 18.13px;
-  cursor: pointer;
-  background-color: transparent;
-}
-
-.card__favorite:hover::before {
+.card__favorite:hover {
   opacity: 0.5;
 }

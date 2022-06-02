@@ -1,7 +1,7 @@
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileEditPopup = document.querySelector(".popup");
-const profileEditCloseButton = document.querySelector(".popup__button");
-const profileEditForm = document.querySelector("#edit-profile-form");
+const profileEditCloseButton = document.querySelector(".popup__button-close");
+const profileEditForm = document.querySelector(".popup__form");
 const profileTitleEl = document.querySelector(".profile__title");
 const profileDescriptionEl = document.querySelector(".profile__description");
 
@@ -15,28 +15,24 @@ const profileDescriptionInput = document.querySelector(
 );
 
 // Card Template
-let cardTemplate =
+const cardTemplate =
   document.querySelector("#card-tmpl").content.firstElementChild;
 
 function closePopup() {
-  profileEditPopup.classList.remove("popup__is-opened");
+  profileEditPopup.classList.remove("popup_is-opened");
 }
 
 function openPopup() {
-  profileEditPopup.classList.add("popup__is-opened");
+  profileEditPopup.classList.add("popup_is-opened");
 }
 
-profileEditButton.addEventListener("click", openPopup);
-profileEditButton.addEventListener("click", () => {
+function handleOpenEditPopup() {
   profileTitleInput.value = profileTitleEl.textContent;
   profileDescriptionInput.value = profileDescriptionEl.textContent;
-
   openPopup();
-});
+}
 
-profileEditCloseButton.addEventListener("click", closePopup);
-
-profileEditForm.addEventListener("submit", (event) => {
+function handleProfileSubmit(event) {
   event.preventDefault();
   const titleValue = event.target.title.value;
   const descriptionValue = event.target.description.value;
@@ -45,7 +41,14 @@ profileEditForm.addEventListener("submit", (event) => {
   profileDescriptionEl.textContent = descriptionValue;
 
   closePopup();
-});
+}
+
+profileEditButton.addEventListener("click", openPopup);
+profileEditButton.addEventListener("click", handleOpenEditPopup);
+
+profileEditCloseButton.addEventListener("click", closePopup);
+
+profileEditForm.addEventListener("submit", handleProfileSubmit);
 
 const initialCards = [
   {
