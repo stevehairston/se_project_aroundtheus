@@ -36,7 +36,7 @@
               <h1 class="profile__title">Jacques Cousteau</h1>
               <button
                 aria-label="edit button"
-                class="profile__edit-button"
+                class="profile__button-edit"
                 type="button"
               ></button>
             </div>
@@ -44,7 +44,7 @@
           </div>
           <button
             aria-label="add button"
-            class="profile__add-button"
+            class="profile__button-add"
             type="button"
           ></button>
         </section>
@@ -54,11 +54,14 @@
       <footer class="footer">
         <p class="footer__copyright">&#169; 2022 Around The U.S.</p>
       </footer>
-      <div class="popup">
+      <div class="popup popup_type_edit">
         <div class="popup__content">
-          <button class="popup__button-close" type="button"></button>
+          <button
+            class="popup__button_type_close popup__button-edit_type_close"
+            type="button"
+          ></button>
           <h3 class="popup__title">Edit profile</h3>
-          <form class="popup__form" name="form">
+          <form class="popup__form popup__form-edit" name="form">
             <input
               type="text"
               class="popup__input popup__input_type_title"
@@ -71,21 +74,61 @@
               placeholder="Description"
               type="text"
             />
-            <button class="popup__button-save" name="save" type="submit">
+            <button class="popup__button_type_save" name="save" type="submit">
               Save
             </button>
           </form>
+        </div>
+      </div>
+      <div class="popup popup_type_add">
+        <div class="popup__content">
+          <button
+            class="popup__button_type_close popup__button-add_type_close"
+            type="button"
+          ></button>
+          <h3 class="popup__title">New place</h3>
+          <form class="popup__form popup__form-add" name="form">
+            <input
+              type="text"
+              class="popup__input popup__input_type_titlePlace"
+              name="titlePlace"
+              placeholder="Title"
+            />
+            <input
+              class="popup__input popup__input_type_link"
+              name="imageLink"
+              placeholder="Image Link"
+              type="text"
+            />
+            <button class="popup__button_type_save" name="create" type="submit">
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="popup js-preview-popup">
+        <div class="popup__content popup__content_type_preview">
+          <button
+            class="popup__button_type_close popup__button-preview_type_close"
+            type="button"
+          ></button>
+          <img class="popup__preview-image" src="" alt="" />
         </div>
       </div>
     </div>
     <template id="card-tmpl">
       <div class="card">
         <img src="" alt="" class="card__image" />
+        <button
+          aria-label="delete_button"
+          class="card__button-delete"
+          type="button"
+        ></button>
         <div class="card__footer">
           <h2 class="card__text"></h2>
           <button
             aria-label="favorite button"
-            class="card__favorite"
+            class="card__button-favorite"
             type="button"
           ></button>
         </div>

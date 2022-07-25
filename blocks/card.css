@@ -3,12 +3,15 @@
   flex-direction: column;
   margin: 0;
   max-width: 282px;
+  position: relative;
 }
 
 .card__image {
   border-radius: 10px 10px 0px 0px;
   height: 282px;
-  object-fit: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .card__footer {
@@ -31,8 +34,8 @@
   flex-shrink: 2;
 }
 
-.card__favorite {
-  background-image: url(../images/heart_favorite_icon.svg);
+.card__button-favorite {
+  background-image: url(../images/favorite_icon.svg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -46,6 +49,32 @@
   cursor: pointer;
 }
 
-.card__favorite:hover {
+.card__button-favorite:hover {
   opacity: 0.5;
+}
+
+.card__button-favorite_state_active {
+  background-image: url(../images/favorite_icon_active.svg);
+}
+
+.card__button-delete {
+  background-image: url(../images/delete_trash_icon.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  width: 18px;
+  height: 19.3px;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  position: absolute;
+  top: 23.79px;
+  right: 16.28px;
+  z-index: 1;
+}
+
+.card__button-delete:hover {
+  opacity: 0.6;
 }
