@@ -2,7 +2,7 @@ const profileEditButton = document.querySelector(".profile__button-edit");
 const editModalWindow = document.querySelector(".popup_type_edit");
 const modalWindow = document.querySelector(".popup");
 const editModalCloseButton = editModalWindow.querySelector(
-  ".popup__button-edit_type_close"
+  ".popup__button-edit-close"
 );
 const profileEditForm = document.querySelector(".popup__form-edit");
 const profileTitleEl = document.querySelector(".profile__title");
@@ -13,11 +13,11 @@ const cardsListEl = document.querySelector(".cards");
 const cardAddButton = document.querySelector(".profile__button-add");
 const addModalButton = document.querySelector(".profile__button-add");
 const addModalWindow = document.querySelector(".popup_type_add");
-const cardAddCloseButton = document.querySelector(
-  ".popup__button-add_type_close"
-);
+// const cardAddCloseButton = document.querySelector(
+//   ".popup__button-add-close"
+// );
 const addModalCloseButton = addModalWindow.querySelector(
-  ".popup__button-add_type_close"
+  ".popup__button-add-close"
 );
 const cardAddForm = document.querySelector(".popup__form-add");
 const cardTitlePlaceEl = document.querySelector(
@@ -28,7 +28,7 @@ const cardimageLinkEl = document.querySelector(".popup__input_type_link");
 const previewImageModalWindow = document.querySelector(".js-preview-popup");
 
 const previewImageModalCloseButton = document.querySelector(
-  ".popup__button-preview_type_close"
+  ".popup__button-preview-close"
 );
 const previewImageEl = document.querySelector(".popup__preview-image");
 
