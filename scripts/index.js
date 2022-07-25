@@ -1,7 +1,7 @@
 const profileEditButton = document.querySelector(".profile__button-edit");
-const editModalWindow = document.querySelector(".popup_type_edit");
+const editProfileModal = document.querySelector(".popup_type_edit");
 const modalWindow = document.querySelector(".popup");
-const editModalCloseButton = editModalWindow.querySelector(
+const editModalCloseButton = editProfileModal.querySelector(
   ".popup__button-edit-close"
 );
 const profileEditForm = document.querySelector(".popup__form-edit");
@@ -13,9 +13,7 @@ const cardsListEl = document.querySelector(".cards");
 const cardAddButton = document.querySelector(".profile__button-add");
 const addModalButton = document.querySelector(".profile__button-add");
 const addModalWindow = document.querySelector(".popup_type_add");
-// const cardAddCloseButton = document.querySelector(
-//   ".popup__button-add-close"
-// );
+
 const addModalCloseButton = addModalWindow.querySelector(
   ".popup__button-add-close"
 );
@@ -23,7 +21,6 @@ const cardAddForm = document.querySelector(".popup__form-add");
 const cardTitlePlaceEl = document.querySelector(
   ".popup__input_type_titlePlace"
 );
-const cardimageLinkEl = document.querySelector(".popup__input_type_link");
 
 const previewImageModalWindow = document.querySelector(".js-preview-popup");
 
@@ -42,48 +39,48 @@ const profileDescriptionInput = document.querySelector(
 const cardTemplate =
   document.querySelector("#card-tmpl").content.firstElementChild;
 
-function handleOpenEditPopup() {
+function fillProfileForm() {
   profileTitleInput.value = profileTitleEl.textContent;
   profileDescriptionInput.value = profileDescriptionEl.textContent;
-  toggleModalWindow(editModalWindow);
+  openModalWindow(editProfileModal);
 }
 
-function handleOpenEditPopup() {
-  profileTitleInput.value = profileTitleEl.textContent;
-  profileDescriptionInput.value = profileDescriptionEl.textContent;
-  toggleModalWindow(editModalWindow);
-}
-
-function editFormSubmitHandler(event) {
+function handleEditFormSubmit(event) {
   event.preventDefault();
   const titleValue = event.target.title.value;
   const descriptionValue = event.target.description.value;
   profileTitleEl.textContent = titleValue;
   profileDescriptionEl.textContent = descriptionValue;
-  toggleModalWindow(editModalWindow);
+  closeModalWindow(editProfileModal);
 }
 
-profileEditButton.addEventListener("click", () =>
-  toggleModalWindow(editModalWindow)
-);
+profileEditButton.addEventListener("click", () => {
+  fillProfileForm();
+});
 
 editModalCloseButton.addEventListener("click", () =>
-  toggleModalWindow(editModalWindow)
+  closeModalWindow(editProfileModal)
 );
 
-addModalButton.addEventListener("click", () =>
-  toggleModalWindow(addModalWindow)
-);
+addModalButton.addEventListener("click", () => openModalWindow(addModalWindow));
 
 addModalCloseButton.addEventListener("click", () =>
-  toggleModalWindow(addModalWindow)
+  closeModalWindow(addModalWindow)
 );
 
 previewImageModalCloseButton.addEventListener("click", () =>
-  toggleModalWindow(previewImageModalWindow)
+  closeModalWindow(previewImageModalWindow)
 );
 
-profileEditForm.addEventListener("submit", editFormSubmitHandler);
+profileEditForm.addEventListener("submit", handleEditFormSubmit);
+
+function openModalWindow(modal) {
+  modal.classList.add("popup_is-opened");
+}
+
+function closeModalWindow(modal) {
+  modal.classList.remove("popup_is-opened");
+}
 
 const initialCards = [
   {
@@ -132,7 +129,8 @@ function generateCardElement(card) {
 
   cardImageEl.addEventListener("click", function () {
     previewImageEl.src = card.link;
-    toggleModalWindow(previewImageModalWindow);
+    previewImageEl.alt = `Photo of ${card.name}`;
+    openModalWindow(previewImageModalWindow);
   });
 
   return cardElement;
@@ -147,10 +145,6 @@ function renderCard(card, container) {
   container.append(card);
 }
 
-function toggleModalWindow(modal) {
-  modal.classList.toggle("popup_is-opened");
-}
-
 function handleDeleteCard() {
   cardEl = event.target.closest(".card");
   cardEl.remove();
@@ -160,14 +154,15 @@ function toggleFavoriteButton() {
   event.target.classList.toggle("card__button-favorite_state_active");
 }
 
-cardAddForm.addEventListener("submit", cardCreateButtonHandler);
+cardAddForm.addEventListener("submit", handleCreateCardFormSubmit);
 
-function cardCreateButtonHandler(event) {
+function handleCreateCardFormSubmit(event) {
   event.preventDefault();
   const titlePlaceValue = event.target.titlePlace.value;
   const imageLinkValue = event.target.imageLink.value;
   const cardData = { name: titlePlaceValue, link: imageLinkValue };
   const hydratedCardEl = generateCardElement(cardData);
   renderCard(hydratedCardEl, cardsListEl);
-  toggleModalWindow(addModalWindow);
+  closeModalWindow(addModalWindow);
+  cardAddForm.reset();
 }
