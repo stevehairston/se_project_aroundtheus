@@ -13,6 +13,7 @@
   pointer-events: none;
   opacity: 0;
   transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+  z-index: 2;
 }
 
 .popup__content {
