@@ -81,7 +81,11 @@
 
 .popup__input_type_title {
   height: 14px;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
+}
+
+.popup__input_type_description {
+  padding-top: 30px;
 }
 
 .popup__button-save {
@@ -101,6 +105,14 @@
   opacity: 0.6;
 }
 
+.popup__button_disabled {
+  box-sizing: border-box;
+  background: #e5e5e5;
+  opacity: 0.2;
+  border: 1px solid #000000;
+  color: #000000;
+}
+
 .popup__titlePlace {
   font-weight: 900;
   font-size: 24px;
@@ -111,7 +123,18 @@
 
 .popup__input_type_titlePlace {
   height: 14px;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
+}
+
+.popup__input_type_link {
+  padding-top: 30px;
+}
+
+.popup__error {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
 }
 
 .popup__content_type_preview {

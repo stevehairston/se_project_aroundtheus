@@ -68,6 +68,20 @@ addModalCloseButton.addEventListener("click", () =>
   closeModalWindow(addModalWindow)
 );
 
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeModalWindow(addModalWindow);
+    closeModalWindow(editProfileModal);
+  }
+});
+
+document.addEventListener("click", function (event) {
+  if (event.target == addModalWindow || event.target == editProfileModal) {
+    closeModalWindow(addModalWindow);
+    closeModalWindow(editProfileModal);
+  }
+});
+
 previewImageModalCloseButton.addEventListener("click", () =>
   closeModalWindow(previewImageModalWindow)
 );

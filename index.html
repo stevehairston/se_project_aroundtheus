@@ -65,18 +65,35 @@
             <input
               type="text"
               class="popup__input popup__input_type_title"
+              id="title-input"
               name="title"
               placeholder="Name"
+              minlength="2"
+              maxlength="40"
+              required
             />
+            <span class="popup__error" id="title-input-error"></span>
             <input
               class="popup__input popup__input_type_description"
+              id="description-input"
               name="description"
               placeholder="Description"
               type="text"
+              minlength="2"
+              maxlength="200"
+              required
             />
-            <button class="popup__button-save" name="save" type="submit">
+            <span class="popup__error" id="description-input-error"></span>
+            <button
+              class="popup__button popup__button-save popup__button_disabled"
+              id="save-button"
+              name="save"
+              type="submit"
+              disabled
+            >
               Save
             </button>
+            <span class="popup__error" id="save-button-error"></span>
           </form>
         </div>
       </div>
@@ -91,18 +108,33 @@
             <input
               type="text"
               class="popup__input popup__input_type_titlePlace"
+              id="titlePlace-input"
               name="titlePlace"
               placeholder="Title"
+              minlength="1"
+              maxlength="30"
+              required
             />
+            <span class="popup__error" id="titlePlace-input-error"></span>
             <input
               class="popup__input popup__input_type_link"
+              id="link-input"
               name="imageLink"
               placeholder="Image Link"
-              type="text"
+              type="url"
+              required
             />
-            <button class="popup__button-save" name="create" type="submit">
+            <span class="popup__error" id="link-input-error"></span>
+            <button
+              class="popup__button popup__button-save popup__button_disabled"
+              id="create-button"
+              name="create"
+              type="submit"
+              disabled
+            >
               Create
             </button>
+            <span class="popup__error" id="create-button-error"></span>
           </form>
         </div>
       </div>
@@ -135,5 +167,6 @@
       </div>
     </template>
     <script defer src="./scripts/index.js"></script>
+    <script defer src="./scripts/validate.js"></script>
   </body>
 </html>
