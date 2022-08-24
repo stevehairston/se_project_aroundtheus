@@ -99,10 +99,19 @@
   margin-top: 48px;
   font-size: 18px;
   line-height: 22px;
+  cursor: pointer;
 }
 
-.popup__button-save:hover {
+.popup__button-save:hover:not(:disabled) {
   opacity: 0.6;
+}
+
+.popup__button_disabled {
+  background: #e5e5e5;
+  opacity: 0.2;
+  border: 1px solid #000000;
+  color: #000000;
+  cursor: default;
 }
 
 .popup__button_disabled {
@@ -111,6 +120,7 @@
   opacity: 0.2;
   border: 1px solid #000000;
   color: #000000;
+  cursor: default;
 }
 
 .popup__titlePlace {

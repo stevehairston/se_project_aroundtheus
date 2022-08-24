@@ -24,11 +24,12 @@ function hideInputError(
   errorMessageElement.classList.remove(errorClass);
 }
 
-function checkInputValidity(formElement, inputElement, config) {
+function toggleInputError(formElement, inputElement, config) {
   if (!inputElement.validity.valid) {
-    return showInputError(formElement, inputElement, config);
+    showInputError(formElement, inputElement, config);
+  } else {
+    hideInputError(formElement, inputElement, config);
   }
-  hideInputError(formElement, inputElement, config);
 }
 
 function hasInvalidInput(inputList) {
@@ -36,7 +37,6 @@ function hasInvalidInput(inputList) {
 }
 
 function disableSubmitButton(submitButton, inactiveButtonClass) {
-  console.log(submitButton);
   submitButton.classList.add(inactiveButtonClass);
   submitButton.disabled = true;
 }
@@ -53,19 +53,20 @@ function toggleButtonState(
 ) {
   if (hasInvalidInput(inputElements)) {
     disableSubmitButton(submitButton, inactiveButtonClass);
-    return;
+  } else {
+    enableSubmitButton(submitButton, inactiveButtonClass);
   }
-  enableSubmitButton(submitButton, inactiveButtonClass);
 }
 
 function setEventListeners(formElement, config) {
   const { inputSelector } = config;
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
-  const submitButton = formElement.querySelector(".popup__button");
+  const submitButton = formElement.querySelector(config.submitButtonSelector);
+  submitButton.disabled = true;
 
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (evt) => {
-      checkInputValidity(formElement, inputElement, config);
+      toggleInputError(formElement, inputElement, config);
       toggleButtonState(inputElements, submitButton, config);
     });
   });
