@@ -101,13 +101,6 @@ function closeModalByEscape(event) {
   }
 }
 
-// document.addEventListener("keydown", function (event) {
-//   const openedModal = document.querySelector(".popup_is-opened");
-//   if (event.key === "Escape") {
-//     closeModalWindow(openedModal);
-//   }
-// });
-
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -192,4 +185,8 @@ function handleCreateCardFormSubmit(event) {
   closeModalWindow(addModalWindow);
 
   cardAddForm.reset();
+  disableSubmitButton(
+    cardAddForm.querySelector(config.submitButtonSelector),
+    config.inactiveButtonClass
+  );
 }

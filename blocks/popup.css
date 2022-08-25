@@ -114,15 +114,6 @@
   cursor: default;
 }
 
-.popup__button_disabled {
-  box-sizing: border-box;
-  background: #e5e5e5;
-  opacity: 0.2;
-  border: 1px solid #000000;
-  color: #000000;
-  cursor: default;
-}
-
 .popup__titlePlace {
   font-weight: 900;
   font-size: 24px;
