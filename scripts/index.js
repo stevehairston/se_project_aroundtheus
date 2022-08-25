@@ -73,7 +73,7 @@ addModalCloseButton.addEventListener("click", () =>
 );
 
 document.addEventListener("mousedown", function (event) {
-  if (event.target.classList !== modalWindow) {
+  if (event.target.classList.contains(modalWindow)) {
     closeModalWindow(event.target);
   }
 });
@@ -95,8 +95,8 @@ function closeModalWindow(modal) {
 }
 
 function closeModalByEscape(event) {
-  const openedModal = document.querySelector(".popup_is-opened");
   if (event.key === "Escape") {
+    const openedModal = document.querySelector(".popup_is-opened");
     closeModalWindow(openedModal);
   }
 }
@@ -161,7 +161,7 @@ initialCards.forEach((cardData) => {
 });
 
 function renderCard(card, container) {
-  container.append(card);
+  container.prepend(card);
 }
 
 function handleDeleteCard(event) {
@@ -169,7 +169,7 @@ function handleDeleteCard(event) {
   cardEl.remove();
 }
 
-function toggleFavoriteButton() {
+function toggleFavoriteButton(event) {
   event.target.classList.toggle("card__button-favorite_state_active");
 }
 
