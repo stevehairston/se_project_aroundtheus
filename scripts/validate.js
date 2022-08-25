@@ -62,10 +62,8 @@ function setEventListeners(formElement, config) {
   const { inputSelector } = config;
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
   const submitButton = formElement.querySelector(config.submitButtonSelector);
-  const inactiveSubmitButton = formElement.querySelector(
-    config.inactiveButtonClass
-  );
-  disableSubmitButton(submitButton, inactiveSubmitButton);
+
+  disableSubmitButton(submitButton, config.inactiveSubmitButton);
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (evt) => {
       toggleInputError(formElement, inputElement, config);

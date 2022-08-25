@@ -73,7 +73,7 @@ addModalCloseButton.addEventListener("click", () =>
 );
 
 document.addEventListener("mousedown", function (event) {
-  if (event.target.classList.contains(modalWindow)) {
+  if (event.target.classList.contains("popup")) {
     closeModalWindow(event.target);
   }
 });
