@@ -1,3 +1,8 @@
+import Card from "./Card.js";
+// import Card from "./Card.js";
+// import FormValidator from "./FormValidator.js";
+// import IdontKnow from "./Utils.js";
+
 const profileEditButton = document.querySelector(".profile__button-edit");
 const editProfileModal = document.querySelector(".popup_type_edit");
 const modalWindow = document.querySelectorAll(".popup");
@@ -133,41 +138,45 @@ const initialCards = [
   },
 ];
 
-function generateCardElement(card) {
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector(".card__text").textContent = card.name;
-  const cardImageEl = cardElement.querySelector(".card__image");
-  cardImageEl.style.backgroundImage = `url(${card.link})`;
+// function generateCardElement(card) {
+//   const cardElement = cardTemplate.cloneNode(true);
+//   cardElement.querySelector(".card__text").textContent = card.name;
+//   const cardImageEl = cardElement.querySelector(".card__image");
+//   cardImageEl.style.backgroundImage = `url(${card.link})`;
 
-  const deleteButton = cardElement.querySelector(".card__button-delete");
-  deleteButton.addEventListener("click", handleDeleteCard);
-  const cardFavoriteButton = cardElement.querySelector(
-    ".card__button-favorite"
-  );
-  cardFavoriteButton.addEventListener("click", toggleFavoriteButton);
+  // const deleteButton = cardElement.querySelector(".card__button-delete");
+  // deleteButton.addEventListener("click", handleDeleteCard);
+  // const cardFavoriteButton = cardElement.querySelector(
+  //   ".card__button-favorite"
+  // );
+  // cardFavoriteButton.addEventListener("click", toggleFavoriteButton);
 
-  cardImageEl.addEventListener("click", function () {
-    previewImageEl.src = card.link;
-    previewImageEl.alt = `Photo of ${card.name}`;
-    openModalWindow(previewImageModalWindow);
-  });
+//   cardImageEl.addEventListener("click", function () {
+//     previewImageEl.src = card.link;
+//     previewImageEl.alt = `Photo of ${card.name}`;
+//     openModalWindow(previewImageModalWindow);
+//   });
 
-  return cardElement;
-}
+//   return cardElement;
+// }
+
+const cardSelector = "#card-tmpl";
 
 initialCards.forEach((cardData) => {
-  const hydratedCardEl = generateCardElement(cardData);
+  const hydratedCardEl = renderCard(cardData);
   renderCard(hydratedCardEl, cardsListEl);
 });
 
-function renderCard(card, container) {
-  container.prepend(card);
+function renderCard (data, container) {
+  const card = new Card(data, cardSelector)
+  const wrap = document.querySelector(".cards");
+  wrap.prepend(card.getView());
 }
 
-function handleDeleteCard(event) {
-  cardEl = event.target.closest(".card");
-  cardEl.remove();
-}
+// function handleDeleteCard(event) {
+//   cardEl = event.target.closest(".card");
+//   cardEl.remove();
+// }
 
 function toggleFavoriteButton(event) {
   event.target.classList.toggle("card__button-favorite_state_active");
@@ -190,3 +199,26 @@ function handleCreateCardFormSubmit(event) {
     config.inactiveButtonClass
   );
 }
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                         New Code Below For Using Classes                   */
+/* -------------------------------------------------------------------------- */
+
+// const validationSettings = {
+//   inputSelector: ".popup__input",
+//   submitButtonSelector: ".popup__button",
+//   inactiveButtonClass: "popup__button_disabled",
+//   inputErrorClass: "popup__input_type_error",
+//   errorClass: "popup__error_visible",
+// };
+
+// const editFormValidator = new FormValidator(
+//   validationSettings,
+//   profileEditForm
+// );
+// editFormValidator.enableValidation();
+
+// const addFormValidator = new FormValidator(validationSettings, cardAddForm);
+// addFormValidator.enableValidation();
