@@ -1,24 +1,13 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import {
-  profileEditForm,
-  profileTitleInput,
-  profileDescriptionInput,
-  editProfileModal,
-  profileTitleEl,
-  profileDescriptionEl,
-  openProfileForm,
   openModalWindow,
   closeModalWindow,
   closeModalByEscape,
-  fillProfileForm,
 } from "./Utils.js";
 
 const profileEditButton = document.querySelector(".profile__button-edit");
 const modalWindow = document.querySelectorAll(".popup");
-const editModalCloseButton = editProfileModal.querySelector(
-  ".popup__button-edit-close"
-);
 
 const cardsListEl = document.querySelector(".cards");
 const cardAddButton = document.querySelector(".profile__button-add");
@@ -32,10 +21,26 @@ const cardTitlePlaceEl = document.querySelector(
   ".popup__input_type_titlePlace"
 );
 
+const profileEditForm = document.querySelector(".popup__form-edit");
+const profileTitleInput = profileEditForm.querySelector(
+  ".popup__input_type_title"
+);
+const profileDescriptionInput = document.querySelector(
+  ".popup__input_type_description"
+);
+
+const editProfileModal = document.querySelector(".popup_type_edit");
+const profileTitleEl = document.querySelector(".profile__title");
+const profileDescriptionEl = document.querySelector(".profile__description");
+
 const previewImageModalWindow = document.querySelector(".js-preview-popup");
 const previewImageModalCloseButton = document.querySelector(
   ".popup__button-preview-close"
 );
+const editModalCloseButton = editProfileModal.querySelector(
+  ".popup__button-edit-close"
+);
+
 const previewImageEl = document.querySelector(".popup__preview-image");
 
 function handleEditFormSubmit(event) {
@@ -61,17 +66,21 @@ addModalCloseButton.addEventListener("click", () =>
   closeModalWindow(addModalWindow)
 );
 
-document.addEventListener("mousedown", function (event) {
-  if (event.target.classList.contains("popup")) {
-    closeModalWindow(event.target);
-  }
-});
-
 previewImageModalCloseButton.addEventListener("click", () =>
   closeModalWindow(previewImageModalWindow)
 );
 
 profileEditForm.addEventListener("submit", handleEditFormSubmit);
+
+function openProfileForm() {
+  openModalWindow(editProfileModal);
+  fillProfileForm();
+}
+
+function fillProfileForm() {
+  profileTitleInput.value = profileTitleEl.textContent;
+  profileDescriptionInput.value = profileDescriptionEl.textContent;
+}
 
 const initialCards = [
   {
@@ -112,7 +121,7 @@ initialCards.forEach((cardData) => {
 });
 
 function renderCard(data, container) {
-  const card = new Card(data, cardSelector);
+  const card = new Card(data, cardSelector, openModalWindow);
   container.prepend(card.getView());
 }
 
@@ -131,7 +140,7 @@ const editFormValidator = new FormValidator(
   validationSettings,
   editFormElement
 );
-editFormValidator.enableValidation("popup_form");
+editFormValidator.enableValidation();
 
 const addFormValidator = new FormValidator(validationSettings, addFormElement);
 addFormValidator.enableValidation("popup_form");

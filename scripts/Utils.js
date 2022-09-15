@@ -1,22 +1,3 @@
-export const profileEditForm = document.querySelector(".popup__form-edit");
-export const profileTitleInput = profileEditForm.querySelector(
-  ".popup__input_type_title"
-);
-export const profileDescriptionInput = document.querySelector(
-  ".popup__input_type_description"
-);
-
-export const editProfileModal = document.querySelector(".popup_type_edit");
-export const profileTitleEl = document.querySelector(".profile__title");
-export const profileDescriptionEl = document.querySelector(
-  ".profile__description"
-);
-
-export function openProfileForm() {
-  openModalWindow(editProfileModal);
-  fillProfileForm();
-}
-
 export function openModalWindow(modal) {
   modal.classList.add("popup_is-opened");
   document.addEventListener("keydown", closeModalByEscape);
@@ -34,7 +15,8 @@ export function closeModalByEscape(event) {
   }
 }
 
-export function fillProfileForm() {
-  profileTitleInput.value = profileTitleEl.textContent;
-  profileDescriptionInput.value = profileDescriptionEl.textContent;
-}
+document.addEventListener("mousedown", function (event) {
+  if (event.target.classList.contains("popup")) {
+    closeModalWindow(event.target);
+  }
+});
