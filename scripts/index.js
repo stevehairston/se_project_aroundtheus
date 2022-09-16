@@ -42,6 +42,9 @@ const editModalCloseButton = editProfileModal.querySelector(
 );
 
 const previewImageEl = document.querySelector(".popup__preview-image");
+const previewCaption = previewImageModalWindow.querySelector(
+  ".popup__preview-caption"
+);
 
 function handleEditFormSubmit(event) {
   event.preventDefault();
@@ -80,6 +83,13 @@ function openProfileForm() {
 function fillProfileForm() {
   profileTitleInput.value = profileTitleEl.textContent;
   profileDescriptionInput.value = profileDescriptionEl.textContent;
+}
+
+function openImagePreview(link, name) {
+  previewImageEl.src = this._link;
+  previewImageEl.alt = `Photo of ${this._name}`;
+  previewCaption.textContent = this._name;
+  openModalWindow(previewImageModalWindow);
 }
 
 const initialCards = [
@@ -121,7 +131,7 @@ initialCards.forEach((cardData) => {
 });
 
 function renderCard(data, container) {
-  const card = new Card(data, cardSelector, openModalWindow);
+  const card = new Card(data, cardSelector, openImagePreview);
   container.prepend(card.getView());
 }
 

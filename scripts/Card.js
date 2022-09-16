@@ -1,10 +1,10 @@
 class Card {
-  constructor(data, cardSelector, openModalWindow) {
+  constructor(data, cardSelector, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
 
     this._cardSelector = cardSelector;
-    this._handleImageClick = openModalWindow;
+    this._handleImageClick = handleImageClick;
   }
 
   _setEventListeners() {
@@ -18,7 +18,9 @@ class Card {
 
     this._element
       .querySelector(".card__image")
-      .addEventListener("click", () => this._handleCardImage());
+      .addEventListener("click", () =>
+        this._handleImageClick(this._link, this._name)
+      );
   }
 
   _handleLikeButton() {
@@ -32,13 +34,6 @@ class Card {
     this._element = null;
   }
 
-  _handleCardImage() {
-    const modal = document.querySelector(".js-preview-popup");
-    modal.querySelector(".popup__preview-image").src = this._link;
-    modal.querySelector(".popup__preview-image").alt = `Photo of ${this._name}`;
-    this._handleImageClick(modal);
-  }
-
   _getTemplate() {
     return document
       .querySelector(this._cardSelector)
@@ -48,8 +43,9 @@ class Card {
 
   getView() {
     this._element = this._getTemplate();
-    this._element.querySelector(".card__image").src = this._link;
-    this._element.querySelector(".card__image").alt = `Photo of ${this._name}`;
+    const imageElement = this._element.querySelector(".card__image");
+    imageElement.src = this._link;
+    imageElement.alt = `Photo of ${this._name}`;
     const cardText = this._element.querySelector(".card__text");
     cardText.textContent = this._name;
 
