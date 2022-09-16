@@ -4,7 +4,7 @@ import {
   openModalWindow,
   closeModalWindow,
   closeModalByEscape,
-} from "./Utils.js";
+} from "./utils.js";
 
 const profileEditButton = document.querySelector(".profile__button-edit");
 const modalWindow = document.querySelectorAll(".popup");
