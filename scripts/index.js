@@ -1,170 +1,126 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import Card from "../components/Card.js";
 import {
-  openModalWindow,
-  closeModalWindow,
-  closeModalByEscape,
-} from "./utils.js";
-
-const profileEditButton = document.querySelector(".profile__button-edit");
-const modalWindow = document.querySelectorAll(".popup");
-
-const cardsListEl = document.querySelector(".cards");
-const cardAddButton = document.querySelector(".profile__button-add");
-const addModalButton = document.querySelector(".profile__button-add");
-const addModalWindow = document.querySelector(".popup_type_add");
-const addModalCloseButton = addModalWindow.querySelector(
-  ".popup__button-add-close"
-);
-const cardAddForm = document.querySelector(".popup__form-add");
-const cardTitlePlaceEl = document.querySelector(
-  ".popup__input_type_titlePlace"
-);
-
-const profileEditForm = document.querySelector(".popup__form-edit");
-const profileTitleInput = profileEditForm.querySelector(
-  ".popup__input_type_title"
-);
-const profileDescriptionInput = document.querySelector(
-  ".popup__input_type_description"
-);
-
-const editProfileModal = document.querySelector(".popup_type_edit");
-const profileTitleEl = document.querySelector(".profile__title");
-const profileDescriptionEl = document.querySelector(".profile__description");
-
-const previewImageModalWindow = document.querySelector(".js-preview-popup");
-const previewImageModalCloseButton = document.querySelector(
-  ".popup__button-preview-close"
-);
-const editModalCloseButton = editProfileModal.querySelector(
-  ".popup__button-edit-close"
-);
-
-const previewImageEl = document.querySelector(".popup__preview-image");
-const previewCaption = previewImageModalWindow.querySelector(
-  ".popup__preview-caption"
-);
-
-function handleEditFormSubmit(event) {
-  event.preventDefault();
-  const titleValue = event.target.title.value;
-  const descriptionValue = event.target.description.value;
-  profileTitleEl.textContent = titleValue;
-  profileDescriptionEl.textContent = descriptionValue;
-  closeModalWindow(editProfileModal);
-}
-
-profileEditButton.addEventListener("click", () => {
-  openProfileForm(editProfileModal);
-});
-
-editModalCloseButton.addEventListener("click", () =>
-  closeModalWindow(editProfileModal)
-);
-
-addModalButton.addEventListener("click", () => openModalWindow(addModalWindow));
-
-addModalCloseButton.addEventListener("click", () =>
-  closeModalWindow(addModalWindow)
-);
-
-previewImageModalCloseButton.addEventListener("click", () =>
-  closeModalWindow(previewImageModalWindow)
-);
-
-profileEditForm.addEventListener("submit", handleEditFormSubmit);
-
-function openProfileForm() {
-  openModalWindow(editProfileModal);
-  fillProfileForm();
-}
-
-function fillProfileForm() {
-  profileTitleInput.value = profileTitleEl.textContent;
-  profileDescriptionInput.value = profileDescriptionEl.textContent;
-}
-
-function openImagePreview(link, name) {
-  previewImageEl.src = this._link;
-  previewImageEl.alt = `Photo of ${this._name}`;
-  previewCaption.textContent = this._name;
-  openModalWindow(previewImageModalWindow);
-}
-
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg ",
-  },
-];
-
-const cardSelector = "#card-tmpl";
-
-initialCards.forEach((cardData) => {
-  renderCard(cardData, cardsListEl);
-});
-
-function renderCard(data, container) {
-  const card = new Card(data, cardSelector, openImagePreview);
-  container.prepend(card.getView());
-}
-
-const validationSettings = {
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
-
-const editFormElement = editProfileModal.querySelector(".popup__form-edit");
-const addFormElement = addModalWindow.querySelector(".popup__form-add");
-
-const editFormValidator = new FormValidator(
   validationSettings,
-  editFormElement
+  initialCards,
+  cardSelectors,
+  addModalButton,
+  profileEditButton,
+  openedModal,
+  cardFormModal,
+  editFormModal,
+  previewImageEl,
+} from "../utils/constants.js";
+import FormValidator from "../components/FormValidator.js";
+// import {
+//   openModalWindow,
+//   closeModalWindow,
+//   closeModalByEscape,
+// } from "./utils.js";
+import Popup from "../components/Popup.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImages from "../components/PopupWithImages.js";
+import Section from "../components/Section.js";
+// import UserInfo from "../components/UserInfo.js";
+
+// should probably be moved into constant and maybe they're the
+// selectors and then refactor editformmodal and addmodal validators to accept a selector or have
+// a selector and do the selection...
+// or have the selector in the constant (latter not very clean)
+
+// const addModalWindow = document.querySelector(".popup_type_add");
+// const editProfileModal = document.querySelector(".popup_type_edit");
+
+// const cardList = new Section({
+//   renderer: (data) => {
+//     const card - new Card(PageTransitionEventdata,
+//       handleCardClick: () => {
+//         cardPreviewPopup.open(data);
+//       })
+//   }
+// })
+
+// Create instances of the classes
+const CardSection = new Section(
+  {
+    renderer: (data) => {
+      const cardEl = new Card(
+        {
+          data,
+          handleImageClick: () => {
+            CardPreviewPopup.openPopup(data);
+          },
+        },
+        cardSelectors.cardTemplate
+      );
+      CardSection.addItem(cardEl.getView());
+    },
+  },
+  cardSelectors.cardSection
 );
-editFormValidator.enableValidation();
 
-const addFormValidator = new FormValidator(validationSettings, addFormElement);
-addFormValidator.enableValidation("popup_form");
-
-cardAddForm.addEventListener("submit", handleCreateCardFormSubmit);
-
-function handleCreateCardFormSubmit(event) {
-  event.preventDefault();
-  const titlePlaceValue = event.target.titlePlace.value;
-  const imageLinkValue = event.target.imageLink.value;
-  const cardData = { name: titlePlaceValue, link: imageLinkValue };
-  renderCard(cardData, cardsListEl);
-  closeModalWindow(addModalWindow);
-
-  cardAddForm.reset();
-  addFormValidator.disableSubmitButton();
+const AddPopupWindow = new PopupWithForm(cardFormModal,
+    () => {
+    event.preventDefault();
+    // const titlePlaceValue = event.target.titlePlace.value;
+    // const imageLinkValue = event.target.imageLink.value;
+    AddPopupWindow._getInputValues(titlePlaceValue, imageLinkValue)
+    const formData = { name: titlePlaceValue, link: imageLinkValue };
+    // CardSection.addItem(formData, cardsListEl);
+    AddPopupWindow.closePopup(cardFormModal);
 }
+  );
+
+// const EditPopupWindow = new PopupWithForm(editFormModal,
+//     (formData) => {
+//   const titleValue = event.target.title.value;
+//   const descriptionValue = event.target.description.value;
+//   profileTitleEl.textContent = titleValue;
+//   profileDescriptionEl.textContent = descriptionValue;
+//   closePopup(editFormModal);
+// }
+//   );
+
+const CardPreviewPopup = new PopupWithImages(previewImageEl);
+
+const editFormValidator = new FormValidator(validationSettings, editFormModal);
+const cardFormValidator = new FormValidator(validationSettings, cardFormModal);
+
+// const userInfoPopup = new PopupWithForm({
+//   popupSelector: popupConfig.editFormalModalWindows,
+//   handleFormSubmit: (data) => {
+//     userInfo.setUserInfo(data)
+//   }
+// });
+
+// initialize all instances
+
+CardSection.renderItems(initialCards);
+CardPreviewPopup.setEventListeners();
+AddPopupWindow.setEventListeners();
+// EditPopupWindow.setEventListeners();
+// editFormValidator.enableValidation();
+// cardFormValidator.enableValidation();
+
+addModalButton.addEventListener("click", () => {
+  AddPopupWindow.openPopup(cardFormModal);
+});
+profileEditButton.addEventListener("click", () => {
+  EditPopupWindow.openPopup(editFormModal);
+});
+
+
+
+// all the rest - event listeners for opening edit and card-add button
+// select inside index.js and then run the popup with form open
+
+// PopupWithForm - adds the functionality of having the form inside
+// the popup that you catch the submit function and pull all of the
+// values out of the inputs and then pass that to whatever
+// the submit function is that is passed to it
+// Section - (should accept a renderer and a class, a rendereritem
+// function)
+// UserInfo.js - selects the user name and title and what controls
+// when they change. Passing data into from the edit form and from input
+// into the form when it is opened (the name and title)
+
+//Validators still live in index.js
