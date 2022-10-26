@@ -64,3 +64,18 @@ export const editModalCloseButton = document.querySelector(
 export const previewModalCloseButton = document.querySelector(
   ".popup__button-preview-close"
 );
+export const cardFormEl = document.querySelector(".popup__form-add");
+export const editFormEl = document.querySelector(".popup__form-edit");
+export const nameSelector = ".profile__name"
+export const descSelector = ".profile__description"
+
+export const profileTitleEl = document.querySelector(".profile__title");
+export const profileDescriptionEl = document.querySelector(".profile__description");
+
+export const profileTitleInput = editFormEl.querySelector(
+  ".popup__input_type_title"
+);
+
+export const profileDescriptionInput = editFormEl.querySelector(
+  ".popup__input_type_description"
+);

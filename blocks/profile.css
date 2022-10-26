@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.profile__title {
+.profile__name {
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
@@ -107,7 +107,7 @@
 }
 
 @media (max-width: 452px) {
-  .profile__title {
+  .profile__name {
     font-size: 22px;
     line-height: 27px;
   }

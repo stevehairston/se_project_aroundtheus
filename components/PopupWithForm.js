@@ -3,21 +3,22 @@ import {
   cardModalCloseButton,
   editModalCloseButton,
 } from "../utils/constants.js";
+// import UserInfo from "../components/UserInfo.js";
 
 class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
 
-    this._modalForm = this._popupElement.querySelector('form');
+    this._modalForm = this._popupElement.querySelector("form");
     this.handleFormSubmit = handleFormSubmit;
   }
 
   _getInputValues() {
-    // collects data from all the input fields and returns that data as an object
-    // get from formData inputs and then use the data to pass to other methods.
-    // const inputValues = this._modalForm.getElementsByTagName("input");
-    // inputValues.forEach(value => formData.append())
-    // return formData = { name: titlePlaceValue, link: imageLinkValue };
+    const inputList = this._popupElement.querySelectorAll(".popup__input");
+
+    const formData = {}
+    inputList.forEach(input => formData[input.name] = input.value);
+    return formData
   }
 
   closePopup() {
@@ -28,8 +29,7 @@ class PopupWithForm extends Popup {
   setEventListeners() {
     this._popupElement.addEventListener("submit", () => {
       const formData = this._getInputValues();
-      // this.handleFormSubmit(formData);
-      this.handleFormSubmit();
+      this.handleFormSubmit(formData);
     });
     cardModalCloseButton.addEventListener("click", () => {
       this.closePopup(this._popupElement);
@@ -42,7 +42,5 @@ class PopupWithForm extends Popup {
     super.setEventListeners();
   }
 }
-
-// Add the setUserInfo method of userInfo (instance in Index.js) to the Profile popup PopupWithForm instance.
 
 export default PopupWithForm;

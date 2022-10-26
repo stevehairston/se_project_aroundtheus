@@ -1,23 +1,22 @@
-// This class is class is responsible for rendering information about the user on the page.
 class UserInfo {
-  constructor({ userNameClassSelector, userTitleClassSelector }) {
-    this._userNameElement = document.querySelector(userNameClassSelector);
-    this._userTitleElement = document.querySelector(userTitleClassSelector)
+  constructor({ userNameSelector, userDescSelector }) {
+    this._userNameEl = document.querySelector(userNameSelector);
+    this._userDescEl = document.querySelector(userDescSelector);
   }
 
-getuserInfo() {
-  //Returns an object with info about user. For cases when need to display the user data in the open form.
-return {
-  userName: this._userNameElement.textContent,
-  userDescription: this._userTitleElement.textContent
-}
-};
+  getUserInfo() {
+    //Returns an object with info about user. For cases when need to display the user data in the open form.
+    return {
+      userName: this._userNameEl.textContent,
+      userDescription: this._userDescEl.textContent,
+    };
+  }
 
-setUserINfo(userName, userDescription) {
-  //Takes new user data and adds it on the page
-  this._userNameElement.textContent = userName,
-  this._userTitleElement.textContent = userDescription
-}
+  setUserInfo({ userName, userDescription }) {
+    // adds data to the page after clicking the Submit button
+    this._userNameEl.textContent = userName;
+    this._userDescEl.textContent = userDescription;
+  }
 }
 
 export default UserInfo;
