@@ -11,14 +11,13 @@
     <meta name="author" content="Steve Hairston" />
     <meta name="keywords" content="Travel US Nature" />
     <title>Around the US</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
 
   <body class="body">
     <div class="page">
       <header class="header">
         <img
-          src="./images/around_the_us.svg"
+          src="<%=require('./images/around_the_us.svg')%>"
           alt="Around The U.S. logo"
           class="logo"
         />
@@ -27,13 +26,13 @@
       <main>
         <section class="profile">
           <img
-            src="./images/jacques_cousteau_avatar.jpg"
+            src="<%=require('./images/jacques_cousteau_avatar.jpg')%>"
             alt="Jacques Cousteau avatar"
             class="profile__avatar"
           />
           <div class="profile__title-description">
             <div class="profile__title-container">
-              <h1 class="profile__name">Jacques Cousteau</h1>
+              <h1 class="profile__title">Jacques Cousteau</h1>
               <button
                 aria-label="edit button"
                 class="profile__button-edit"
@@ -165,6 +164,5 @@
         </div>
       </div>
     </template>
-    <script type="module" defer src="./scripts/index.js"></script>
   </body>
 </html>

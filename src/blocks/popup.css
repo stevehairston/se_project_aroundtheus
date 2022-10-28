@@ -61,7 +61,7 @@
   opacity: 0.6;
 }
 
-.popup__name {
+.popup__title {
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
@@ -79,7 +79,7 @@
   padding: 0 0 13.26px 0;
 }
 
-.popup__input_type_name {
+.popup__input_type_title {
   height: 14px;
   margin-bottom: 5px;
 }
@@ -172,7 +172,7 @@
     padding: 25px 22px;
   }
 
-  .popup__name {
+  .popup__title {
     font-size: 18px;
     line-height: 22px;
   }

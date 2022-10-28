@@ -3,8 +3,6 @@ import {
   cardModalCloseButton,
   editModalCloseButton,
 } from "../utils/constants.js";
-// import UserInfo from "../components/UserInfo.js";
-
 class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
@@ -16,9 +14,9 @@ class PopupWithForm extends Popup {
   _getInputValues() {
     const inputList = this._popupElement.querySelectorAll(".popup__input");
 
-    const formData = {}
-    inputList.forEach(input => formData[input.name] = input.value);
-    return formData
+    const formData = {};
+    inputList.forEach((input) => (formData[input.name] = input.value));
+    return formData;
   }
 
   closePopup() {

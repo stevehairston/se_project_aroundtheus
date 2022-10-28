@@ -1,3 +1,4 @@
+import "../pages/index.css";
 import Card from "../components/Card.js";
 import {
   validationSettings,
@@ -11,12 +12,10 @@ import {
   previewImageEl,
   cardFormEl,
   editFormEl,
-  nameSelector,
+  titleSelector,
   descSelector,
-  profileTitleEl,
-  profileDescriptionEl,
   profileTitleInput,
-  profileDescriptionInput
+  profileDescriptionInput,
 } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
@@ -51,15 +50,18 @@ const AddPopupWindow = new PopupWithForm(cardFormModal, (formData) => {
   AddPopupWindow.closePopup(cardFormModal);
 });
 
-const EditPopupWindow = new PopupWithForm(editFormModal, () => {
+const EditPopupWindow = new PopupWithForm(editFormModal, (formData) => {
   event.preventDefault();
-  UserInfoDisplay.setUserInfo(profileTitleInput, profileDescriptionInput);
+  UserInfoDisplay.setUserInfo({
+    userName: formData.title,
+    userDescription: formData.description,
+  });
   EditPopupWindow.closePopup(editFormModal);
 });
 
 const UserInfoDisplay = new UserInfo({
-  userNameSelector: nameSelector,
-  userDescSelector: descSelector
+  userTitleSelector: titleSelector,
+  userDescSelector: descSelector,
 });
 const editFormValidator = new FormValidator(validationSettings, editFormEl);
 const cardFormValidator = new FormValidator(validationSettings, cardFormEl);
@@ -76,6 +78,8 @@ addModalButton.addEventListener("click", () => {
   AddPopupWindow.openPopup(cardFormModal);
 });
 profileEditButton.addEventListener("click", () => {
-  UserInfoDisplay.getUserInfo();
   EditPopupWindow.openPopup(editFormModal);
+  const userInfo = UserInfoDisplay.getUserInfo();
+  profileTitleInput.value = userInfo.userName;
+  profileDescriptionInput.value = userInfo.userDescription;
 });
