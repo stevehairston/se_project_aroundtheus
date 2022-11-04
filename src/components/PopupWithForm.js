@@ -1,8 +1,4 @@
 import Popup from "../components/Popup.js";
-import {
-  cardModalCloseButton,
-  editModalCloseButton,
-} from "../utils/constants.js";
 class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
@@ -28,13 +24,6 @@ class PopupWithForm extends Popup {
     this._popupElement.addEventListener("submit", () => {
       const formData = this._getInputValues();
       this.handleFormSubmit(formData);
-    });
-    cardModalCloseButton.addEventListener("click", () => {
-      this.closePopup(this._popupElement);
-    });
-
-    editModalCloseButton.addEventListener("click", () => {
-      this.closePopup(this._popupElement);
     });
 
     super.setEventListeners();
