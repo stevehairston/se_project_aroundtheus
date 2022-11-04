@@ -5,6 +5,7 @@ class Card {
 
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._likeButton = document.querySelector(".card__button-favorite");
   }
 
   _setEventListeners() {
