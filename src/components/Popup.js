@@ -18,7 +18,7 @@ class Popup {
 
   _handleEscClose(evt) {
     if (evt.key === ESC_KEYCODE) {
-      this.closePopup(this._popupElement);
+      this.closePopup();
     }
   }
 

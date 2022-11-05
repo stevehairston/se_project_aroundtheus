@@ -23,7 +23,7 @@ class FormValidator {
       `#${inputElement.id}-error`
     );
     inputElement.classList.remove(this._inputErrorClass);
-    errorMessageElement.textContent = inputElement.validationMessage;
+    errorMessageElement.textContent = "";
     errorMessageElement.classList.remove(this._errorClass);
   }
 
