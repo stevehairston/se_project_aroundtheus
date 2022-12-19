@@ -1,7 +1,9 @@
 class Card {
-  constructor({ data, handleImageClick }, cardSelector) {
+  constructor({ data, handleImageClick}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
+    // this._confirmDeletePopup = confirmDeletePopup; confirmDeletePopup
 
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
@@ -13,9 +15,9 @@ class Card {
       .querySelector(".card__button-favorite")
       .addEventListener("click", () => this._handleLikeButton());
 
-    this._element
-      .querySelector(".card__button-delete")
-      .addEventListener("click", () => this._handleDeleteCard());
+    // this._element
+    //   .querySelector(".card__button-delete")
+    //   .addEventListener("click", () => this._confirmDeletePopup());
 
     this._element
       .querySelector(".card__image")
@@ -49,9 +51,15 @@ class Card {
     imageElement.alt = `Photo of ${this._name}`;
     const cardText = this._element.querySelector(".card__text");
     cardText.textContent = this._name;
-
     this._setEventListeners();
+    this._setLikesInfo()
     return this._element;
+  }
+
+  _setLikesInfo() {
+    const likesCounter = this._element.querySelector(".card__favorite-counter");
+    const likeTotal = this._likes.length;
+    likesCounter.textContent = likeTotal;
   }
 }
 

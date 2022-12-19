@@ -32,14 +32,14 @@
           />
           <div class="profile__title-description">
             <div class="profile__title-container">
-              <h1 class="profile__title">Jacques Cousteau</h1>
+              <h1 class="profile__title"></h1>
               <button
                 aria-label="edit button"
                 class="profile__button-edit"
                 type="button"
               ></button>
             </div>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
           </div>
           <button
             aria-label="add button"
@@ -146,6 +146,23 @@
         </div>
       </div>
     </div>
+    <div class="popup popup_type_delete">
+    <div class="popup__content">
+      <button
+        class="popup__button-close popup__button-delete-close"
+        type="button"
+      ></button>
+      <h3 class="popup__title">Are you sure?</h3>
+      <button
+          class="popup__button popup__button-delete"
+          id="delete-button"
+          name="delete"
+          type="submit"
+        >
+          Yes
+      </button>
+    </div>
+  </div>
     <template id="card-tmpl">
       <div class="card">
         <img src=" " alt="" class="card__image" />
@@ -161,6 +178,7 @@
             class="card__button-favorite"
             type="button"
           ></button>
+          <p class="card__favorite-counter"></p>
         </div>
       </div>
     </template>

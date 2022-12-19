@@ -58,6 +58,18 @@
   background-image: url(../images/favorite_icon_active.svg);
 }
 
+.card__favorite-counter {
+  width: 9px;
+  height: 13px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: black;
+  margin: 0;
+  padding: 3 24 0 0;
+}
+
 .card__button-delete {
   background-image: url(../images/delete_trash_icon.svg);
   background-size: contain;
