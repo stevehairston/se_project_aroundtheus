@@ -147,39 +147,41 @@
       </div>
     </div>
     <div class="popup popup_type_delete">
-    <div class="popup__content">
-      <button
-        class="popup__button-close popup__button-delete-close"
-        type="button"
-      ></button>
-      <h3 class="popup__title">Are you sure?</h3>
-      <button
-          class="popup__button popup__button-delete"
-          id="delete-button"
-          name="delete"
-          type="submit"
-        >
-          Yes
-      </button>
+      <div class="popup__content">
+        <button
+          class="popup__button-close popup__button-delete-close"
+          type="button"
+        ></button>
+          <h3 class="popup__title popup__title-delete" >Are you sure?</h3>
+        <button
+            class="popup__button popup__button-delete"
+            id="delete-button"
+            name="delete"
+            type="submit"
+          >
+            Yes
+        </button>
+      </div>
     </div>
-  </div>
     <template id="card-tmpl">
       <div class="card">
         <img src=" " alt="" class="card__image" />
-        <button
-          aria-label="delete_button"
-          class="card__button-delete"
-          type="button"
-        ></button>
-        <div class="card__footer">
-          <h2 class="card__text"></h2>
           <button
-            aria-label="favorite button"
-            class="card__button-favorite"
+            aria-label="delete_button"
+            class="card__button-delete card__button-delete_hide"
             type="button"
           ></button>
-          <p class="card__favorite-counter"></p>
-        </div>
+          <div class="card__footer">
+              <h2 class="card__text"></h2>
+            <div class="card__like-info">
+              <button
+                aria-label="favorite button"
+                class="card__button-favorite"
+                type="button"
+              ></button>
+              <p class="card__favorite-counter"></p>
+            </div>
+          </div>
       </div>
     </template>
   </body>

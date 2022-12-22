@@ -5,8 +5,8 @@ import {
   cardSelectors,
   addModalButton,
   profileEditButton,
-  deleteConfirmButton,
-  openedModal,
+  // deleteConfirmButton,
+  // openedModal,
   cardFormModal,
   editFormModal,
   deleteConfirmModal,
@@ -19,16 +19,20 @@ import {
   profileDescriptionInput,
   aroundUsBaseUrl,
   apiRequestOpts,
+  userProfile,
 } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
+// import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImages from "../components/PopupWithImages.js";
+import PopupWithPrompt from "../components/PopupWithPrompt";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
-// const deleteConfirmPopup = new Popup(deleteConfirmModal);
+const cardDeleteConfirmPopup = new PopupWithPrompt(deleteConfirmModal, () => {
+  addPopupWindow.closePopup();
+});
 
 const cardSection = new Section(
   {
@@ -39,9 +43,9 @@ const cardSection = new Section(
           handleImageClick: () => {
             cardPreviewPopup.openPopup(data);
           },
-          // confirmDeletePopup: () => {
-          //   deleteConfirmPopup.openPopup();
-          // }
+          cardDelConfirm: () => {
+            cardDeleteConfirmPopup.openPopup();
+          }
         },
         cardSelectors.cardTemplate
       );
@@ -52,13 +56,12 @@ const cardSection = new Section(
 );
 
 const addPopupWindow = new PopupWithForm(cardFormModal, (formData) => {
-  const newCard = [];
-  newCard.push(formData);
-  cardSection.renderItems(newCard);
   api.addCard({
-        name: formData.name,
-        link: formData.link,
-      });
+    name: formData.name,
+    link: formData.link,
+  }).then((data) => {
+    cardSection.renderItems([data]);
+  });
   addPopupWindow.closePopup();
 });
 
@@ -88,6 +91,7 @@ const api = new Api(aroundUsBaseUrl, apiRequestOpts);
 cardPreviewPopup.setEventListeners();
 addPopupWindow.setEventListeners();
 editPopupWindow.setEventListeners();
+cardDeleteConfirmPopup.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 
@@ -106,8 +110,8 @@ profileEditButton.addEventListener("click", () => {
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([initialCards, userData]) => {
-    // currentUserId = userData._id;
-    // profile.setAttribute("id", userData._id);
+    // const currentUserId = userData._id;
+    userProfile.setAttribute("id", userData._id);
 
     userInfoDisplay.setUserInfo({
       userName: userData.name,
@@ -118,3 +122,4 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     cardSection.renderItems(initialCards);
   })
   .catch((err) => console.log(err));
+

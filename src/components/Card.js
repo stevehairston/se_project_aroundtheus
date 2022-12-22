@@ -1,13 +1,16 @@
 class Card {
-  constructor({ data, handleImageClick}, cardSelector) {
+  constructor({ data, handleImageClick, cardDelConfirm }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    // this._confirmDeletePopup = confirmDeletePopup; confirmDeletePopup
+    this._cardDelConfirm = cardDelConfirm;
+    this._cardOwnerId = data._id;
 
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._likeButton = document.querySelector(".card__button-favorite");
+    this._userProfileId = document.querySelector(".profile").getAttribute('id')
+
   }
 
   _setEventListeners() {
@@ -17,7 +20,11 @@ class Card {
 
     // this._element
     //   .querySelector(".card__button-delete")
-    //   .addEventListener("click", () => this._confirmDeletePopup());
+    //   .addEventListener("click", () => this._handleDeleteCard());
+
+    this._element
+      .querySelector(".card__button-delete")
+      .addEventListener("click", () => this._cardDelConfirm());
 
     this._element
       .querySelector(".card__image")
@@ -52,7 +59,9 @@ class Card {
     const cardText = this._element.querySelector(".card__text");
     cardText.textContent = this._name;
     this._setEventListeners();
-    this._setLikesInfo()
+    this._setLikesInfo();
+    this._cardDisplayBinIcon();
+
     return this._element;
   }
 
@@ -60,6 +69,12 @@ class Card {
     const likesCounter = this._element.querySelector(".card__favorite-counter");
     const likeTotal = this._likes.length;
     likesCounter.textContent = likeTotal;
+  }
+
+  _cardDisplayBinIcon() {
+    if (this._cardOwnerId == this._userProfileId) {
+      console.log("Got ID")
+    }
   }
 }
 

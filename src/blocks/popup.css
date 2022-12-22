@@ -67,6 +67,7 @@
   line-height: 29px;
   color: black;
   margin: 0 0 54px 0;
+  font-family: 'Inter';
 }
 
 .popup__input {
@@ -165,6 +166,28 @@
   font-size: 12px;
   line-height: 15px;
   color: #ffffff;
+}
+
+
+.popup__button-delete {
+  width: 358px;
+  height: 50px;
+  background-color: black;
+  border: none;
+  border-radius: 2px;
+  padding: 0;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+}
+
+.popup__title-delete {
+  margin: 0px 0px 38px;
 }
 
 @media (max-width: 770px) {
