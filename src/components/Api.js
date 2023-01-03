@@ -63,6 +63,50 @@ class Api {
         return Prommise.reject(`Error  ${res.status}`);
       })
     }
+
+  deleteCard(data) {
+    return fetch(`${this.url}/cards/${data}`, {
+      method: "DELETE",
+      headers: this.options
+      })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Prommise.reject(`Error  ${res.status}`);
+      })
+    }
+
+  likeCard(data) {
+    return fetch(`${this.url}/cards/likes/${data}`, {
+      method: "PUT",
+      headers: this.options
+      })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Prommise.reject(`Error  ${res.status}`);
+      })
+    }
+
+    removeLike(data) {
+    return fetch(`${this.url}/cards/likes/${data}`, {
+      method: "DELETE",
+      headers: this.options
+      })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Prommise.reject(`Error  ${res.status}`);
+      })
+    }
+
 }
+
 
 export default Api;

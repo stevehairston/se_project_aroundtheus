@@ -5,8 +5,6 @@ import {
   cardSelectors,
   addModalButton,
   profileEditButton,
-  // deleteConfirmButton,
-  // openedModal,
   cardFormModal,
   editFormModal,
   deleteConfirmModal,
@@ -22,7 +20,6 @@ import {
   userProfile,
 } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
-// import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImages from "../components/PopupWithImages.js";
 import PopupWithPrompt from "../components/PopupWithPrompt";
@@ -30,9 +27,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
-const cardDeleteConfirmPopup = new PopupWithPrompt(deleteConfirmModal, () => {
-  addPopupWindow.closePopup();
-});
+const deletePopupWindow = new PopupWithPrompt(deleteConfirmModal);
 
 const cardSection = new Section(
   {
@@ -43,26 +38,53 @@ const cardSection = new Section(
           handleImageClick: () => {
             cardPreviewPopup.openPopup(data);
           },
-          cardDelConfirm: () => {
-            cardDeleteConfirmPopup.openPopup();
-          }
+          handleDeleteClick: () => {
+            deletePopupWindow.confirmButtonClick(() => {
+              deletePopupWindow.dataSaving(true);
+              api
+                .deleteCard(data._id)
+                .then(() => {
+                  cardEl.handleDeleteCard();
+                  deletePopupWindow.closePopup();
+                })
+                .catch((err) => console.log(err))
+                .finally(() => {
+                  deletePopupWindow.dataSaving(false);
+                });
+            });
+            deletePopupWindow.openPopup();
+          },
+          handleLikeClick: () => {
+            api.likeCard(data._id)
+            .then ((data) => {
+              cardEl.setLikesInfo(data)
+            })
+            .catch((err) => console.log(err));
+            }
         },
         cardSelectors.cardTemplate
       );
       cardSection.addItem(cardEl.getView());
     },
   },
-  cardSelectors.cardSection,
+  cardSelectors.cardSection
 );
 
 const addPopupWindow = new PopupWithForm(cardFormModal, (formData) => {
-  api.addCard({
-    name: formData.name,
-    link: formData.link,
-  }).then((data) => {
-    cardSection.renderItems([data]);
-  });
-  addPopupWindow.closePopup();
+  addPopupWindow.dataSaving(true);
+  api
+    .addCard({
+      name: formData.name,
+      link: formData.link,
+    })
+    .then((data) => {
+      cardSection.renderItems([data]);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      deletePopupWindow.dataSaving(false);
+    });
+    addPopupWindow.closePopup();
 });
 
 const editPopupWindow = new PopupWithForm(editFormModal, (formData) => {
@@ -70,9 +92,16 @@ const editPopupWindow = new PopupWithForm(editFormModal, (formData) => {
     userName: formData.title,
     userDescription: formData.description,
   });
+  editPopupWindow.dataSaving(true);
   api.editUserProfile({
     name: formData.title,
     about: formData.description,
+  })
+  .then((data) => {
+  })
+  .catch((err) => console.log(err))
+  .finally(() => {
+    editPopupWindow.dataSaving(false);
   });
   editPopupWindow.closePopup();
 });
@@ -91,7 +120,7 @@ const api = new Api(aroundUsBaseUrl, apiRequestOpts);
 cardPreviewPopup.setEventListeners();
 addPopupWindow.setEventListeners();
 editPopupWindow.setEventListeners();
-cardDeleteConfirmPopup.setEventListeners();
+deletePopupWindow.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 
@@ -110,9 +139,7 @@ profileEditButton.addEventListener("click", () => {
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([initialCards, userData]) => {
-    // const currentUserId = userData._id;
     userProfile.setAttribute("id", userData._id);
-
     userInfoDisplay.setUserInfo({
       userName: userData.name,
       userDescription: userData.about,
@@ -122,4 +149,3 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     cardSection.renderItems(initialCards);
   })
   .catch((err) => console.log(err));
-

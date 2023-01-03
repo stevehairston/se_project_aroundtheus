@@ -17,7 +17,6 @@ export const validationSettings = {
 
 export const addModalButton = document.querySelector(".profile__button-add");
 export const profileEditButton = document.querySelector(".profile__button-edit");
-// export const deleteConfirmButton = document.querySelector(".popup__button-delete");
 export const previewImageEl = ".js-preview-popup"
 export const cardFormModal = ".popup_type_add";
 export const editFormModal = ".popup_type_edit";
@@ -25,18 +24,6 @@ export const deleteConfirmModal = ".popup_type_delete";
 export const cardTitlePlaceEl = document.querySelector(
   ".popup__input_type_titlePlace"
 );
-// export const cardModalCloseButton = document.querySelector(
-//   ".popup__button-add-close"
-// );
-// export const editModalCloseButton = document.querySelector(
-//   ".popup__button-edit-close"
-// );
-// export const previewModalCloseButton = document.querySelector(
-//   ".popup__button-preview-close"
-// );
-// export const deleteCardModalCloseButton = document.querySelector(
-//   ".popup__button-delete-close"
-// );
 export const cardFormEl = document.querySelector(".popup__form-add");
 export const editFormEl = document.querySelector(".popup__form-edit");
 export const titleSelector = ".profile__title"
@@ -49,8 +36,7 @@ export const profileDescriptionInput = editFormEl.querySelector(
 );
 
 export const userProfile = document.querySelector(
-  ".profile"
-);
+  ".profile__title");
 
 export const aroundUsBaseUrl = "https://around.nomoreparties.co/v1/group-12";
 
