@@ -1,12 +1,12 @@
 import Popup from "../components/Popup.js";
-class PopupWithPrompt extends Popup {
-    constructor(popupSelector, confirmButtonClick) {
+class PopupWithConfirmation extends Popup {
+  constructor(popupSelector, confirmButtonClick) {
     super(popupSelector);
 
-    this._confirmButtonClick = confirmButtonClick
+    this._confirmButtonClick = confirmButtonClick;
     this._modalForm = this._popupElement.querySelector("form");
     this._popupButton = this._popupElement.querySelector(".popup__button");
-    this._initialText = this._popupButton.textContent
+    this._initialText = this._popupButton.textContent;
   }
 
   confirmButtonClick(confirm) {
@@ -16,9 +16,8 @@ class PopupWithPrompt extends Popup {
   dataSaving(isSaving) {
     if (isSaving) {
       this._popupButton.textContent = "Saving...";
-    }
-    else
-    {this._popupButton.textContent = this._initialText;
+    } else {
+      this._popupButton.textContent = this._initialText;
     }
   }
 
@@ -29,7 +28,6 @@ class PopupWithPrompt extends Popup {
 
     super.setEventListeners();
   }
-
 }
 
-export default PopupWithPrompt;
+export default PopupWithConfirmation;

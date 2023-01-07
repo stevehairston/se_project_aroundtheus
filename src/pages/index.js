@@ -3,12 +3,16 @@ import Card from "../components/Card.js";
 import {
   validationSettings,
   cardSelectors,
+  avatarEditIcon,
   addModalButton,
   profileEditButton,
+  avatarFormModal,
   cardFormModal,
   editFormModal,
   deleteConfirmModal,
   previewImageEl,
+  avatarImage,
+  avatarFormEl,
   cardFormEl,
   editFormEl,
   titleSelector,
@@ -22,12 +26,12 @@ import {
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImages from "../components/PopupWithImages.js";
-import PopupWithPrompt from "../components/PopupWithPrompt";
+import PopupWithConfirmation from "../components/PopupWithConfirmation";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
-const deletePopupWindow = new PopupWithPrompt(deleteConfirmModal);
+const deletePopupWindow = new PopupWithConfirmation(deleteConfirmModal);
 
 const cardSection = new Section(
   {
@@ -47,7 +51,7 @@ const cardSection = new Section(
                   cardEl.handleDeleteCard();
                   deletePopupWindow.closePopup();
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => console.log(`An error has occurred ${err}`))
                 .finally(() => {
                   deletePopupWindow.dataSaving(false);
                 });
@@ -55,12 +59,26 @@ const cardSection = new Section(
             deletePopupWindow.openPopup();
           },
           handleLikeClick: () => {
-            api.likeCard(data._id)
-            .then ((data) => {
-              cardEl.setLikesInfo(data)
-            })
-            .catch((err) => console.log(err));
+            if (cardEl.isLiked()) {
+              api
+                .removeLike(data._id)
+                .then((res) => {
+                  cardEl.displayLikes(res.likes);
+                })
+                .catch((err) => {
+                  console.log(`An error has occurred ${err}`);
+                });
+            } else {
+              api
+                .addLike(data._id)
+                .then((res) => {
+                  cardEl.displayLikes(res.likes);
+                })
+                .catch((err) => {
+                  console.log(`An error has occurred ${err}`);
+                });
             }
+          },
         },
         cardSelectors.cardTemplate
       );
@@ -80,11 +98,11 @@ const addPopupWindow = new PopupWithForm(cardFormModal, (formData) => {
     .then((data) => {
       cardSection.renderItems([data]);
     })
-    .catch((err) => console.log(err))
+    .catch((err) => console.log(`An error has occurred ${err}`))
     .finally(() => {
-      deletePopupWindow.dataSaving(false);
+      addPopupWindow.dataSaving(false);
     });
-    addPopupWindow.closePopup();
+  addPopupWindow.closePopup();
 });
 
 const editPopupWindow = new PopupWithForm(editFormModal, (formData) => {
@@ -93,17 +111,34 @@ const editPopupWindow = new PopupWithForm(editFormModal, (formData) => {
     userDescription: formData.description,
   });
   editPopupWindow.dataSaving(true);
-  api.editUserProfile({
-    name: formData.title,
-    about: formData.description,
-  })
-  .then((data) => {
-  })
-  .catch((err) => console.log(err))
-  .finally(() => {
-    editPopupWindow.dataSaving(false);
-  });
+  api
+    .editUserProfile({
+      name: formData.title,
+      about: formData.description,
+    })
+    .then((data) => {})
+    .catch((err) => console.log(`An error has occurred ${err}`))
+    .finally(() => {
+      editPopupWindow.dataSaving(false);
+    });
   editPopupWindow.closePopup();
+});
+
+const avatarPopupWindow = new PopupWithForm(avatarFormModal, (formData) => {
+  avatarPopupWindow.dataSaving(true);
+  api
+    .updateAvatar({
+      link: formData.link,
+    })
+    .then((data) => {
+      console.log(data);
+      avatarImage.src = data.avatar;
+    })
+    .catch((err) => console.log(`An error has occurred ${err}`))
+    .finally(() => {
+      avatarPopupWindow.dataSaving(false);
+    });
+  avatarPopupWindow.closePopup();
 });
 
 const userInfoDisplay = new UserInfo({
@@ -113,16 +148,37 @@ const userInfoDisplay = new UserInfo({
 
 const editFormValidator = new FormValidator(validationSettings, editFormEl);
 const cardFormValidator = new FormValidator(validationSettings, cardFormEl);
+const avatarFormValidator = new FormValidator(validationSettings, avatarFormEl);
 const cardPreviewPopup = new PopupWithImages(previewImageEl);
 
 const api = new Api(aroundUsBaseUrl, apiRequestOpts);
+
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([initialCards, userData]) => {
+    userProfile.setAttribute("id", userData._id);
+    userInfoDisplay.setUserInfo({
+      userName: userData.name,
+      userDescription: userData.about,
+      userAvatar: userData.avatar,
+    });
+
+    cardSection.renderItems(initialCards);
+  })
+  .catch((err) => console.log(`An error has occurred ${err}`));
 
 cardPreviewPopup.setEventListeners();
 addPopupWindow.setEventListeners();
 editPopupWindow.setEventListeners();
 deletePopupWindow.setEventListeners();
+avatarPopupWindow.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
+
+avatarEditIcon.addEventListener("click", () => {
+  avatarPopupWindow.openPopup();
+  avatarFormValidator.resetValidation();
+});
 
 addModalButton.addEventListener("click", () => {
   addPopupWindow.openPopup();
@@ -136,16 +192,3 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = userInfo.userDescription;
   editFormValidator.resetValidation();
 });
-
-Promise.all([api.getInitialCards(), api.getUserInfo()])
-  .then(([initialCards, userData]) => {
-    userProfile.setAttribute("id", userData._id);
-    userInfoDisplay.setUserInfo({
-      userName: userData.name,
-      userDescription: userData.about,
-      userAvatar: userData.avatar,
-    });
-
-    cardSection.renderItems(initialCards);
-  })
-  .catch((err) => console.log(err));

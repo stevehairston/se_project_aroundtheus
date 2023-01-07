@@ -6,12 +6,11 @@ class PopupWithForm extends Popup {
     this._modalForm = this._popupElement.querySelector("form");
     this.handleFormSubmit = handleFormSubmit;
     this._popupButton = this._popupElement.querySelector(".popup__button");
-    this._initialText = this._popupButton.textContent
+    this._initialText = this._popupButton.textContent;
   }
 
   _getInputValues() {
     const inputList = this._popupElement.querySelectorAll(".popup__input");
-
     const formData = {};
     inputList.forEach((input) => (formData[input.name] = input.value));
     return formData;
@@ -25,9 +24,8 @@ class PopupWithForm extends Popup {
   dataSaving(isSaving) {
     if (isSaving) {
       this._popupButton.textContent = "Saving...";
-    }
-    else
-    {this._popupButton.textContent = this._initialText;
+    } else {
+      this._popupButton.textContent = this._initialText;
     }
   }
 

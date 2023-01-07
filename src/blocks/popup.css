@@ -190,6 +190,10 @@
   margin: 0px 0px 38px;
 }
 
+.popup__input_type_link-avatar {
+  padding-top: 0;
+}
+
 @media (max-width: 770px) {
   .popup__content {
     padding: 25px 22px;
