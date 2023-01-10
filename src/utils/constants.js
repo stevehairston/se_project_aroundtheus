@@ -29,13 +29,12 @@ export const cardTitlePlaceEl = document.querySelector(
   ".popup__input_type_titlePlace"
 );
 
-export const avatarImage = document.getElementById("avatarImage");
-
 export const avatarFormEl = document.querySelector(".popup__form-avatar");
 export const cardFormEl = document.querySelector(".popup__form-add");
 export const editFormEl = document.querySelector(".popup__form-edit");
 export const titleSelector = ".profile__title";
 export const descSelector = ".profile__description";
+export const avatarSelector = ".profile__avatar-image";
 export const profileTitleInput = editFormEl.querySelector(
   ".popup__input_type_title"
 );

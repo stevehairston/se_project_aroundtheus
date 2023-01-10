@@ -1,19 +1,18 @@
 import Popup from "../components/Popup.js";
 class PopupWithConfirmation extends Popup {
-  constructor(popupSelector, confirmButtonClick) {
+  constructor(popupSelector, setConfirmHandler) {
     super(popupSelector);
 
-    this._confirmButtonClick = confirmButtonClick;
-    this._modalForm = this._popupElement.querySelector("form");
+    this._setConfirmHandler = setConfirmHandler;
     this._popupButton = this._popupElement.querySelector(".popup__button");
     this._initialText = this._popupButton.textContent;
   }
 
-  confirmButtonClick(confirm) {
-    this._confirmButtonClick = confirm;
+  setConfirmHandler(confirm) {
+    this._setConfirmHandler = confirm;
   }
 
-  dataSaving(isSaving) {
+  renderLoading(isSaving) {
     if (isSaving) {
       this._popupButton.textContent = "Saving...";
     } else {
@@ -23,7 +22,7 @@ class PopupWithConfirmation extends Popup {
 
   setEventListeners() {
     this._popupButton.addEventListener("click", (event) => {
-      this._confirmButtonClick();
+      this._setConfirmHandler();
     });
 
     super.setEventListeners();

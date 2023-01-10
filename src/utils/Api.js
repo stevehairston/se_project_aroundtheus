@@ -4,28 +4,24 @@ class Api {
     this.options = options;
   }
 
+_porcessResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+
+  return Prommise.reject(`Error  ${res.status}`);
+}
+
   getUserInfo() {
     return fetch(`${this.url}/users/me`, {
       headers: this.options,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Prommise.reject(`Error  ${res.status}`);
-    });
+    }).then(this._porcessResponse);
   }
 
   getInitialCards() {
     return fetch(`${this.url}/cards`, {
       headers: this.options,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Prommise.reject(`Error  ${res.status}`);
-    });
+    }).then(this._porcessResponse);
   }
 
   editUserProfile(userData) {
@@ -36,13 +32,7 @@ class Api {
         name: userData.name,
         about: userData.about,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Prommise.reject(`Error  ${res.status}`);
-    });
+    }).then(this._porcessResponse);
   }
 
   addCard(data) {
@@ -53,69 +43,38 @@ class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Prommise.reject(`Error  ${res.status}`);
-    });
+    }).then(this._porcessResponse);
   }
 
   deleteCard(data) {
     return fetch(`${this.url}/cards/${data}`, {
       method: "DELETE",
       headers: this.options,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Prommise.reject(`Error  ${res.status}`);
-    });
+    }).then(this._porcessResponse);
   }
 
   addLike(data) {
     return fetch(`${this.url}/cards/likes/${data}`, {
       method: "PUT",
       headers: this.options,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Prommise.reject(`Error  ${res.status}`);
-    });
+    }).then(this._porcessResponse);
   }
 
   removeLike(data) {
     return fetch(`${this.url}/cards/likes/${data}`, {
       method: "DELETE",
       headers: this.options,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Prommise.reject(`Error  ${res.status}`);
-    });
+    }).then(this._porcessResponse);
   }
 
   updateAvatar(data) {
-    console.log(data.link);
     return fetch(`${this.url}/users/me/avatar`, {
       method: "PATCH",
       headers: this.options,
       body: JSON.stringify({
         avatar: data.link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Prommise.reject(`Error  ${res.status}`);
-    });
+    }).then(this._porcessResponse);
   }
 }
 

@@ -28,13 +28,12 @@ class Popup {
         this.closePopup();
       }
     });
-      this._popupElement.addEventListener("click", (event) => {
-        if (event.target.classList.contains("popup__button-close")) {
-          this.closePopup();
-        }
+    this._popupElement.addEventListener("click", (event) => {
+      if (event.target.classList.contains("popup__button-close")) {
+        this.closePopup();
+      }
     });
   }
-
 }
 
 export default Popup;

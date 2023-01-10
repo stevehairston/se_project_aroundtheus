@@ -7,6 +7,7 @@ class FormValidator {
     this._errorClass = settings.errorClass;
 
     this._form = formElement;
+    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
   }
 
   _showInputError(inputElement) {
@@ -63,7 +64,6 @@ class FormValidator {
     this._inputList = Array.from(
       this._form.querySelectorAll(this._inputSelector)
     );
-    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
     this.disableSubmitButton();
 
     this._inputList.forEach((inputElement) => {

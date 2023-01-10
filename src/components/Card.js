@@ -1,6 +1,6 @@
 class Card {
   constructor(
-    { data, handleImageClick, handleDeleteClick, handleLikeClick },
+    { data, userId, handleImageClick, handleDeleteClick, handleLikeClick },
     cardSelector
   ) {
     this._name = data.name;
@@ -8,18 +8,16 @@ class Card {
     this._likes = data.likes;
     this._cardOwnerId = data.owner._id;
     this._cardId = data._id;
+    this._userId = userId;
 
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this.handleDeleteClick = handleDeleteClick;
     this.handleLikeClick = handleLikeClick;
-    this._userId = document.querySelector(".profile__title").getAttribute("id");
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(".card__button-favorite")
-      .addEventListener("click", () => this.handleLikeClick());
+    this._likeButton.addEventListener("click", () => this.handleLikeClick());
 
     this._element
       .querySelector(".card__button-delete")
@@ -48,7 +46,9 @@ class Card {
     cardText.textContent = this._name;
     this._likeButton = this._element.querySelector(".card__button-favorite");
     this._element.setAttribute("id", this._cardId);
+    this._likesCounter = this._element.querySelector(".card__favorite-counter");
 
+    this._renderLikes();
     this._setEventListeners();
     this.displayLikes(this._likes);
     this._cardDisplayBinIcon();
@@ -69,7 +69,7 @@ class Card {
   }
 
   isLiked() {
-    return Boolean(this._likes.find((item) => item._id === this._userId));
+    return this._likes.some((item) => item._id === this._userId);
   }
 
   _handleLikeButton() {
@@ -81,15 +81,24 @@ class Card {
   }
 
   _updateLikeCount() {
-    const likesCounter = this._element.querySelector(".card__favorite-counter");
     const likeTotal = this._likes.length;
-    likesCounter.textContent = likeTotal;
+    this._likesCounter.textContent = likeTotal;
   }
 
   displayLikes(data) {
     this._likes = data || [];
     this._handleLikeButton();
     this._updateLikeCount();
+  }
+
+  _renderLikes() {
+    this._handleLikeButton();
+    this._updateLikeCount();
+  }
+
+  updateLikes(likes) {
+    this._likes = likes;
+    this._renderLikes();
   }
 }
 

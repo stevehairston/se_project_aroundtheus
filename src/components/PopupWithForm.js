@@ -21,7 +21,7 @@ class PopupWithForm extends Popup {
     super.closePopup();
   }
 
-  dataSaving(isSaving) {
+  renderLoading(isSaving) {
     if (isSaving) {
       this._popupButton.textContent = "Saving...";
     } else {

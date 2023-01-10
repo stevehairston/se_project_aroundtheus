@@ -11,12 +11,12 @@ import {
   editFormModal,
   deleteConfirmModal,
   previewImageEl,
-  avatarImage,
   avatarFormEl,
   cardFormEl,
   editFormEl,
   titleSelector,
   descSelector,
+  avatarSelector,
   profileTitleInput,
   profileDescriptionInput,
   aroundUsBaseUrl,
@@ -25,11 +25,11 @@ import {
 } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import PopupWithImages from "../components/PopupWithImages.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import Api from "../components/Api.js";
+import Api from "../utils/Api.js";
 
 const deletePopupWindow = new PopupWithConfirmation(deleteConfirmModal);
 
@@ -39,12 +39,13 @@ const cardSection = new Section(
       const cardEl = new Card(
         {
           data,
+          userId,
           handleImageClick: () => {
             cardPreviewPopup.openPopup(data);
           },
           handleDeleteClick: () => {
-            deletePopupWindow.confirmButtonClick(() => {
-              deletePopupWindow.dataSaving(true);
+            deletePopupWindow.setConfirmHandler(() => {
+              deletePopupWindow.renderLoading(true);
               api
                 .deleteCard(data._id)
                 .then(() => {
@@ -53,7 +54,7 @@ const cardSection = new Section(
                 })
                 .catch((err) => console.log(`An error has occurred ${err}`))
                 .finally(() => {
-                  deletePopupWindow.dataSaving(false);
+                  deletePopupWindow.renderLoading(false);
                 });
             });
             deletePopupWindow.openPopup();
@@ -63,7 +64,7 @@ const cardSection = new Section(
               api
                 .removeLike(data._id)
                 .then((res) => {
-                  cardEl.displayLikes(res.likes);
+                  cardEl.updateLikes(res.likes);
                 })
                 .catch((err) => {
                   console.log(`An error has occurred ${err}`);
@@ -72,7 +73,7 @@ const cardSection = new Section(
               api
                 .addLike(data._id)
                 .then((res) => {
-                  cardEl.displayLikes(res.likes);
+                  cardEl.updateLikes(res.likes);
                 })
                 .catch((err) => {
                   console.log(`An error has occurred ${err}`);
@@ -89,7 +90,7 @@ const cardSection = new Section(
 );
 
 const addPopupWindow = new PopupWithForm(cardFormModal, (formData) => {
-  addPopupWindow.dataSaving(true);
+  addPopupWindow.renderLoading(true);
   api
     .addCard({
       name: formData.name,
@@ -100,43 +101,43 @@ const addPopupWindow = new PopupWithForm(cardFormModal, (formData) => {
     })
     .catch((err) => console.log(`An error has occurred ${err}`))
     .finally(() => {
-      addPopupWindow.dataSaving(false);
+      addPopupWindow.renderLoading(false);
     });
   addPopupWindow.closePopup();
 });
 
 const editPopupWindow = new PopupWithForm(editFormModal, (formData) => {
-  userInfoDisplay.setUserInfo({
-    userName: formData.title,
-    userDescription: formData.description,
-  });
-  editPopupWindow.dataSaving(true);
+  editPopupWindow.renderLoading(true);
   api
     .editUserProfile({
       name: formData.title,
       about: formData.description,
     })
-    .then((data) => {})
+    .then((data) => {
+      userInfoDisplay.setUserInfo({
+        userName: formData.title,
+        userDescription: formData.description,
+      });
+    })
     .catch((err) => console.log(`An error has occurred ${err}`))
     .finally(() => {
-      editPopupWindow.dataSaving(false);
+      editPopupWindow.renderLoading(false);
     });
   editPopupWindow.closePopup();
 });
 
 const avatarPopupWindow = new PopupWithForm(avatarFormModal, (formData) => {
-  avatarPopupWindow.dataSaving(true);
+  avatarPopupWindow.renderLoading(true);
   api
     .updateAvatar({
       link: formData.link,
     })
     .then((data) => {
-      console.log(data);
-      avatarImage.src = data.avatar;
+      userInfo.setUserAvatar(data.avatar);
     })
     .catch((err) => console.log(`An error has occurred ${err}`))
     .finally(() => {
-      avatarPopupWindow.dataSaving(false);
+      avatarPopupWindow.renderLoading(false);
     });
   avatarPopupWindow.closePopup();
 });
@@ -146,22 +147,27 @@ const userInfoDisplay = new UserInfo({
   userDescSelector: descSelector,
 });
 
+const userInfo = new UserInfo({
+  userAvatarSelector: avatarSelector,
+});
+
 const editFormValidator = new FormValidator(validationSettings, editFormEl);
 const cardFormValidator = new FormValidator(validationSettings, cardFormEl);
 const avatarFormValidator = new FormValidator(validationSettings, avatarFormEl);
-const cardPreviewPopup = new PopupWithImages(previewImageEl);
+const cardPreviewPopup = new PopupWithImage(previewImageEl);
 
 const api = new Api(aroundUsBaseUrl, apiRequestOpts);
 
+let userId;
+
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([initialCards, userData]) => {
-    userProfile.setAttribute("id", userData._id);
+    userId = userData._id;
     userInfoDisplay.setUserInfo({
       userName: userData.name,
       userDescription: userData.about,
-      userAvatar: userData.avatar,
     });
-
+    userInfo.setUserAvatar(userData.avatar);
     cardSection.renderItems(initialCards);
   })
   .catch((err) => console.log(`An error has occurred ${err}`));
@@ -185,10 +191,15 @@ addModalButton.addEventListener("click", () => {
   cardFormValidator.resetValidation();
 });
 
-profileEditButton.addEventListener("click", () => {
-  editPopupWindow.openPopup();
-  const userInfo = userInfoDisplay.getUserInfo();
+function fillProfileForm(userInfo) {
   profileTitleInput.value = userInfo.userName;
   profileDescriptionInput.value = userInfo.userDescription;
+}
+
+profileEditButton.addEventListener("click", () => {
+  editPopupWindow.openPopup();
+  editPopupWindow.fillProfileForm();
+  const userInfo = userInfoDisplay.getUserInfo();
+  fillProfileForm(userInfo);
   editFormValidator.resetValidation();
 });
