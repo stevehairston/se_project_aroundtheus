@@ -50,7 +50,6 @@ class Card {
 
     this._renderLikes();
     this._setEventListeners();
-    this.displayLikes(this._likes);
     this._cardDisplayBinIcon();
 
     return this._element;
@@ -83,12 +82,6 @@ class Card {
   _updateLikeCount() {
     const likeTotal = this._likes.length;
     this._likesCounter.textContent = likeTotal;
-  }
-
-  displayLikes(data) {
-    this._likes = data || [];
-    this._handleLikeButton();
-    this._updateLikeCount();
   }
 
   _renderLikes() {

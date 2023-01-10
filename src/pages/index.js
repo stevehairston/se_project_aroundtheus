@@ -98,12 +98,12 @@ const addPopupWindow = new PopupWithForm(cardFormModal, (formData) => {
     })
     .then((data) => {
       cardSection.renderItems([data]);
+      addPopupWindow.closePopup();
     })
     .catch((err) => console.log(`An error has occurred ${err}`))
     .finally(() => {
       addPopupWindow.renderLoading(false);
     });
-  addPopupWindow.closePopup();
 });
 
 const editPopupWindow = new PopupWithForm(editFormModal, (formData) => {
@@ -118,12 +118,12 @@ const editPopupWindow = new PopupWithForm(editFormModal, (formData) => {
         userName: formData.title,
         userDescription: formData.description,
       });
+      editPopupWindow.closePopup();
     })
     .catch((err) => console.log(`An error has occurred ${err}`))
     .finally(() => {
       editPopupWindow.renderLoading(false);
     });
-  editPopupWindow.closePopup();
 });
 
 const avatarPopupWindow = new PopupWithForm(avatarFormModal, (formData) => {
@@ -134,12 +134,12 @@ const avatarPopupWindow = new PopupWithForm(avatarFormModal, (formData) => {
     })
     .then((data) => {
       userInfo.setUserAvatar(data.avatar);
+      avatarPopupWindow.closePopup();
     })
     .catch((err) => console.log(`An error has occurred ${err}`))
     .finally(() => {
       avatarPopupWindow.renderLoading(false);
     });
-  avatarPopupWindow.closePopup();
 });
 
 const userInfoDisplay = new UserInfo({
@@ -198,7 +198,6 @@ function fillProfileForm(userInfo) {
 
 profileEditButton.addEventListener("click", () => {
   editPopupWindow.openPopup();
-  editPopupWindow.fillProfileForm();
   const userInfo = userInfoDisplay.getUserInfo();
   fillProfileForm(userInfo);
   editFormValidator.resetValidation();
